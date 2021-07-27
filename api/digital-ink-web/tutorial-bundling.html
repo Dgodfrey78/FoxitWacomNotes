@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Tutorial: Webpack Configuration Manual</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Tutorial: Webpack Configuration Manual</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>Webpack Configuration Manual</h2>
+</header>
+
+<article>
+    <h3><strong>Overview</strong></h3>
+<hr>
+<p>Bundeling with webpack requires some additional configuration for proper bundeling integration of digital-ink dependency with third party technologies.
+<strong>analyze</strong> script tag provides analyses about bundle structure. Properly integrated <strong>digital-ink</strong> package should not contains any of externals as a part from bundeling structure.</p>
+<h3><strong>With React</strong></h3>
+<hr>
+<p>This configuration targets <strong>create-react-app</strong> and <strong>react-scripts</strong>. Requires <strong>react-app-rewired</strong> plugin.</p>
+<pre class="prettyprint source"><code>/* config-overrides.js */
+const rewireProvidePlugin = require('react-app-rewire-provide-plugin');
+const rewireDefinePlugin = require('@yeutech-lab/react-app-rewire-define-plugin');
+
+module.exports = function override(config, env) {​​​​​​​​
+	if (!config.eternals) {​​​​​​
+		config.externals = [];
+	}​​
+
+	if (!config.plugins) {​​​​​​​​
+		config.plugins = [];
+	}​​​​​​​
+
+	config.externals = [...config.externals, 'bindings', 'canvas', 'gl', 'systeminformation'];
+
+	config = rewireProvidePlugin(config, env, {​​​​​​​​
+		// expose some of public dependencies - these ones which do not provides ECMA 6 exports
+		ClipperLib: 'clipper-lib',
+		poly2tri: 'poly2tri',
+		protobuf: 'protobufjs',
+		Long: 'long',
+		md5: 'js-md5'
+	}​​​​​​​​);
+
+	config = rewireDefinePlugin(config, env, {​​​​​​​​
+		DIGITAL_INK_ENV:'&quot;BROWSER&quot;'
+	}​​​​​​​​);
+
+	return config;
+}​​​​​​​​
+</code></pre>
+<p><strong>react-app-rewired</strong> plugin requires some changes in <strong>package.json</strong> scripts section:</p>
+<pre class="prettyprint source"><code>&quot;scripts&quot;: {​​​​​​​​
+	&quot;analyze&quot;: &quot;source-map-explorer 'build/static/js/*.js'&quot;,
+	&quot;start&quot;: &quot;react-app-rewired start -host 0.0.0.0&quot;,
+	&quot;build&quot;: &quot;react-app-rewired build&quot;,
+	&quot;test&quot;: &quot;react-scripts test&quot;,
+	&quot;eject&quot;: &quot;react-scripts eject&quot;
+}​​​​​​​​
+</code></pre>
+<h3><strong>With Nuxt</strong></h3>
+<hr>
+<pre class="prettyprint source"><code>/* nuxt.config.js */
+import webpack from 'webpack'
+
+export default {
+	...,
+
+	// Build configuration
+	build: {
+		extend(config, ctx) {
+			if (ctx.isDev && ctx.isClient) {
+				...
+
+				config.externals = ['bindings', 'canvas', 'gl', 'systeminformation']
+
+				// exclude commonjs dependencies
+				config.node = {
+					fs: &quot;empty&quot;,
+					net: &quot;empty&quot;,
+					child_process: &quot;empty&quot;
+				}
+			}
+		},
+		plugins: [
+			new webpack.ProvidePlugin({
+				...
+
+				// expose some of public dependencies - these ones which do not provides ECMA 6 exports
+				ClipperLib: 'clipper-lib',
+				poly2tri: 'poly2tri',
+				protobuf: 'protobufjs',
+				Long: 'long',
+				md5: 'js-md5'
+			}),
+
+			new webpack.DefinePlugin({
+				DIGITAL_INK_ENV: '&quot;BROWSER&quot;'
+			})
+		]
+	}
+}
+</code></pre>
+<p><strong>package.json</strong> scripts section:</p>
+<pre class="prettyprint source"><code>&quot;scripts&quot;: {
+	&quot;analyze&quot;: &quot;nuxt build --analyze&quot;,
+	&quot;build&quot;: &quot;nuxt build&quot;,
+	&quot;dev&quot;: &quot;nuxt --hostname 0.0.0.0&quot;,
+	&quot;start&quot;: &quot;nuxt start --hostname 0.0.0.0&quot;,
+	&quot;generate&quot;: &quot;nuxt generate&quot;
+}
+</code></pre>
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-fsx.html">fsx</a></li><li><a href="module-math.html">math</a></li></ul><h3>Namespaces</h3><ul><li><a href="Generic.html">Generic</a></li><li><a href="InkInput.html">InkInput</a></li><li><a href="InkModel.html">InkModel</a></li><li><a href="Manipulation.html">Manipulation</a></li><li><a href="PathBuilding.html">PathBuilding</a></li><li><a href="PathBuilding.Pipeline.html">Pipeline</a></li><li><a href="Rasterization.html">Rasterization</a></li><li><a href="Rasterization.2D.html">2D</a></li><li><a href="Rasterization.WebGL.html">WebGL</a></li><li><a href="Semantics.html">Semantics</a></li><li><a href="Serialization.html">Serialization</a></li></ul><h3>Classes</h3><ul><li><a href="Generic.Color.html">Color</a></li><li><a href="Generic.Identifiable.html">Identifiable</a></li><li><a href="Generic.Matrix.html">Matrix</a></li><li><a href="Generic.Point.html">Point</a></li><li><a href="Generic.Rect.html">Rect</a></li><li><a href="InkInput.Environment.html">Environment</a></li><li><a href="InkInput.InkInputProvider.html">InkInputProvider</a></li><li><a href="InkInput.InputContext.html">InputContext</a></li><li><a href="InkInput.InputDevice.html">InputDevice</a></li><li><a href="InkInput.Scalar.html">Scalar</a></li><li><a href="InkInput.SensorChannel.html">SensorChannel</a></li><li><a href="InkInput.SensorChannelsContext.html">SensorChannelsContext</a></li><li><a href="InkInput.SensorContext.html">SensorContext</a></li><li><a href="InkInput.SensorData.html">SensorData</a></li><li><a href="InkInput.SensorStream.html">SensorStream</a></li><li><a href="InkModel.Element.html">Element</a></li><li><a href="InkModel.Group.html">Group</a></li><li><a href="InkModel.InkNode.html">InkNode</a></li><li><a href="InkModel.Path.html">Path</a></li><li><a href="InkModel.View.html">View</a></li><li><a href="InputListener.html">InputListener</a></li><li><a href="Manipulation.Intersector.html">Intersector</a></li><li><a href="Manipulation.Manipulator.html">Manipulator</a></li><li><a href="Manipulation.Selector.html">Selector</a></li><li><a href="Manipulation.SpatialContext.html">SpatialContext</a></li><li><a href="PathBuilding.ConvexHullProducer.html">ConvexHullProducer</a></li><li><a href="PathBuilding.InkBuilder.html">InkBuilder</a></li><li><a href="PathBuilding.InkBuilderAbstract.html">InkBuilderAbstract</a></li><li><a href="PathBuilding.InkBuilderAsync.html">InkBuilderAsync</a></li><li><a href="PathBuilding.InkPath2D.html">InkPath2D</a></li><li><a href="PathBuilding.InterpolatedSpline.html">InterpolatedSpline</a></li><li><a href="PathBuilding.PathPoint.html">PathPoint</a></li><li><a href="PathBuilding.PathPointContext.html">PathPointContext</a></li><li><a href="PathBuilding.html#.PathSegment">PathSegment</a></li><li><a href="PathBuilding.Pipeline.BrushApplier.html">BrushApplier</a></li><li><a href="PathBuilding.Pipeline.ConvexHullChainProducer.html">ConvexHullChainProducer</a></li><li><a href="PathBuilding.Pipeline.CurvatureBasedInterpolator.html">CurvatureBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.DataProcessor.html">DataProcessor</a></li><li><a href="PathBuilding.Pipeline.DataSequenceProcessor.html">DataSequenceProcessor</a></li><li><a href="PathBuilding.Pipeline.DistanceBasedInterpolator.html">DistanceBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.PathProducer.html">PathProducer</a></li><li><a href="PathBuilding.Pipeline.PolygonMerger.html">PolygonMerger</a></li><li><a href="PathBuilding.Pipeline.PolygonSimplifier.html">PolygonSimplifier</a></li><li><a href="PathBuilding.Pipeline.Smoother.html">Smoother</a></li><li><a href="PathBuilding.Pipeline.SplineInterpolator.html">SplineInterpolator</a></li><li><a href="PathBuilding.Pipeline.SplineProducer.html">SplineProducer</a></li><li><a href="PathBuilding.PointerData.html">PointerData</a></li><li><a href="PathBuilding.Spline.html">Spline</a></li><li><a href="Rasterization.2D.Brush2D.html">Brush2D</a></li><li><a href="Rasterization.2D.BrushPrototype.html">BrushPrototype</a></li><li><a href="Rasterization.2D.InkCanvas2D.html">InkCanvas2D</a></li><li><a href="Rasterization.2D.OffscreenLayer2D.html">OffscreenLayer2D</a></li><li><a href="Rasterization.2D.ShapeFactory.html">ShapeFactory</a></li><li><a href="Rasterization.2D.StrokeRenderer2D.html">StrokeRenderer2D</a></li><li><a href="Rasterization.Layer.html">Layer</a></li><li><a href="Rasterization.WebGL.BrushGL.html">BrushGL</a></li><li><a href="Rasterization.WebGL.GLProgram.html">GLProgram</a></li><li><a href="Rasterization.WebGL.InkCanvasGL.html">InkCanvasGL</a></li><li><a href="Rasterization.WebGL.InkContext.html">InkContext</a></li><li><a href="Rasterization.WebGL.InkGLContext.html">InkGLContext</a></li><li><a href="Rasterization.WebGL.InkLayer.html">InkLayer</a></li><li><a href="Rasterization.WebGL.OffscreenCanvasGL.html">OffscreenCanvasGL</a></li><li><a href="Rasterization.WebGL.OffscreenLayerGL.html">OffscreenLayerGL</a></li><li><a href="Rasterization.WebGL.RectGL.html">RectGL</a></li><li><a href="Rasterization.WebGL.StrokeDrawContext.html">StrokeDrawContext</a></li><li><a href="Rasterization.WebGL.StrokeRendererGL.html">StrokeRendererGL</a></li><li><a href="Semantics.SemanticTriple.html">SemanticTriple</a></li><li><a href="Semantics.TripleStore.html">TripleStore</a></li><li><a href="Serialization.InkCodec.html">InkCodec</a></li><li><a href="Serialization.InkObjectDecoder.html">InkObjectDecoder</a></li><li><a href="Serialization.InkObjectEncoder.html">InkObjectEncoder</a></li><li><a href="Serialization.TypedArrayCodec.html">TypedArrayCodec</a></li><li><a href="Stroke.html">Stroke</a></li><li><a href="URIResolver.html">URIResolver</a></li></ul><h3>Interfaces</h3><ul><li><a href="InkInput.InkController.html">InkController</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-bundling.html">Webpack Configuration Manual</a></li><li><a href="tutorial-ink-rendering-pipeline.html">Ink Rendering Pipeline</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 15:38:16 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

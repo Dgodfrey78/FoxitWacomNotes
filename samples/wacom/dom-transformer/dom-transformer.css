@@ -1,0 +1,9 @@
+.resize-handle {position: absolute; font-size: 0.1px;}
+.resize-handle.top {width: 96%; height: 7px; top: -6px; left: 2%; cursor: ns-resize;}
+.resize-handle.bottom {width: 96%; height: 7px; bottom: -6px; left: 2%; cursor: ns-resize;}
+.resize-handle.left {width: 7px; height: 96%; top: 2%; left: -6px; cursor: ew-resize;}
+.resize-handle.right {width: 7px; height: 96%; top: 2%; right: -6px; cursor: ew-resize;}
+.resize-handle.top-left {width: 18px; height: 18px; top: -9px; left: -9px; cursor: nwse-resize; z-index: 1;}
+.resize-handle.top-right {width: 18px; height: 18px; top: -9px; right: -9px; cursor: nesw-resize; z-index: 1;}
+.resize-handle.bottom-left {width: 18px; height: 18px; bottom: -9px; left: -9px; cursor: nesw-resize; z-index: 1;}
+.resize-handle.bottom-right {width: 18px; height: 18px; bottom: -9px; right: -9px; cursor: nwse-resize; z-index: 1;}

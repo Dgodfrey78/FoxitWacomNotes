@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: WebGL</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: WebGL</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="Rasterization.html">Rasterization</a>.</span>WebGL</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="Rasterization.WebGL.BrushGL.html">BrushGL</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.GLProgram.html">GLProgram</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.InkCanvasGL.html">InkCanvasGL</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.InkContext.html">InkContext</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.InkGLContext.html">InkGLContext</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.InkLayer.html">InkLayer</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.OffscreenCanvasGL.html">OffscreenCanvasGL</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.OffscreenLayerGL.html">OffscreenLayerGL</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.RectGL.html">RectGL</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.StrokeDrawContext.html">StrokeDrawContext</a></dt>
+            <dd></dd>
+        
+            <dt><a href="Rasterization.WebGL.StrokeRendererGL.html">StrokeRendererGL</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id=".InkLayerOptions">InkLayerOptions</h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Layer width, required when user defined framebuffer or renderbuffer properties are not available or specific texture size is desired</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Layer height, required when user defined Framebuffer or Renderbuffer properties are not available or specific texture size is desired</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scaleFactor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last"><p>Layer is scaled</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>flipY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>useBuffersStorage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Used for auto allocated gl resources, by default allocates WebGLTexture
+When is true WebGLTexture is allocated else WebGLFramebuffer and WebGLRenderbuffer are allocated.
+Memory managment will be handled automatically.
+Applicable only when own resource is not available.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>framebuffer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">WebGLFramebuffer</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>User defined framebuffer. When Renderbuffer not available it should be attached to the framebuffer.
+When attachment is not available or attachment is not renderbuffer exception is thrown. Renderbuffer dimensions used for layer creation.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>renderbuffer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">WebGLRenderbuffer</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>User defined renderbuffer, Renderbuffer dimensions used for layer creation.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>texture</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">WebGLTexture</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>User defined texture,
+width and height not required when desired size matches image size and image is attached to the texture (fillTexture attaches image)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ownGlResources</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>When own resource is attached, this property should be true.
+Memory managment will not be handled automatically, layer will free the GL resources when deallocated.
+Applicable only when own resource is available.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id=".WebGLContextAttributes">WebGLContextAttributes</h4>
+
+
+
+
+<div class="description">
+    <p>Defines WebGL context attributes</p>
+</div>
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>alpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean that indicates if the canvas contains an alpha buffer.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>antialias</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean that indicates whether or not to perform anti-aliasing.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>depth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean that indicates whether or not to perform anti-aliasing.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>desynchronized</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean that hints the user agent to reduce the latency by desynchronizing the canvas paint cycle from the event loop.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>failIfMajorPerformanceCaveat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean that indicates if a context will be created if the system performance is low or if no hardware GPU is available.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>powerPreference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "default"
+                
+                </td>
+            
+
+            <td class="description last"><p>A hint to the user agent indicating what configuration of GPU is suitable for the WebGL context. Possible values are:</p>
+<ul>
+<li>&quot;default&quot;: Let the user agent decide which GPU configuration is most suitable. This is the default value.</li>
+<li>&quot;high-performance&quot;: Prioritizes rendering performance over power consumption.</li>
+<li>&quot;low-power&quot;: Prioritizes power saving over rendering performance.</li>
+</ul></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>premultipliedAlpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean that indicates that the page compositor will assume the drawing buffer contains colors with pre-multiplied alpha.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>preserveDrawingBuffer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>If the value is true the buffers will not be cleared and will preserve their values until cleared or overwritten by the author.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>stencil</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean that indicates that the drawing buffer has a stencil buffer of at least 8 bits.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-fsx.html">fsx</a></li><li><a href="module-math.html">math</a></li></ul><h3>Namespaces</h3><ul><li><a href="Generic.html">Generic</a></li><li><a href="InkInput.html">InkInput</a></li><li><a href="InkModel.html">InkModel</a></li><li><a href="Manipulation.html">Manipulation</a></li><li><a href="PathBuilding.html">PathBuilding</a></li><li><a href="PathBuilding.Pipeline.html">Pipeline</a></li><li><a href="Rasterization.html">Rasterization</a></li><li><a href="Rasterization.2D.html">2D</a></li><li><a href="Rasterization.WebGL.html">WebGL</a></li><li><a href="Semantics.html">Semantics</a></li><li><a href="Serialization.html">Serialization</a></li></ul><h3>Classes</h3><ul><li><a href="Generic.Color.html">Color</a></li><li><a href="Generic.Identifiable.html">Identifiable</a></li><li><a href="Generic.Matrix.html">Matrix</a></li><li><a href="Generic.Point.html">Point</a></li><li><a href="Generic.Rect.html">Rect</a></li><li><a href="InkInput.Environment.html">Environment</a></li><li><a href="InkInput.InkInputProvider.html">InkInputProvider</a></li><li><a href="InkInput.InputContext.html">InputContext</a></li><li><a href="InkInput.InputDevice.html">InputDevice</a></li><li><a href="InkInput.Scalar.html">Scalar</a></li><li><a href="InkInput.SensorChannel.html">SensorChannel</a></li><li><a href="InkInput.SensorChannelsContext.html">SensorChannelsContext</a></li><li><a href="InkInput.SensorContext.html">SensorContext</a></li><li><a href="InkInput.SensorData.html">SensorData</a></li><li><a href="InkInput.SensorStream.html">SensorStream</a></li><li><a href="InkModel.Element.html">Element</a></li><li><a href="InkModel.Group.html">Group</a></li><li><a href="InkModel.InkNode.html">InkNode</a></li><li><a href="InkModel.Path.html">Path</a></li><li><a href="InkModel.View.html">View</a></li><li><a href="InputListener.html">InputListener</a></li><li><a href="Manipulation.Intersector.html">Intersector</a></li><li><a href="Manipulation.Manipulator.html">Manipulator</a></li><li><a href="Manipulation.Selector.html">Selector</a></li><li><a href="Manipulation.SpatialContext.html">SpatialContext</a></li><li><a href="PathBuilding.ConvexHullProducer.html">ConvexHullProducer</a></li><li><a href="PathBuilding.InkBuilder.html">InkBuilder</a></li><li><a href="PathBuilding.InkBuilderAbstract.html">InkBuilderAbstract</a></li><li><a href="PathBuilding.InkBuilderAsync.html">InkBuilderAsync</a></li><li><a href="PathBuilding.InkPath2D.html">InkPath2D</a></li><li><a href="PathBuilding.InterpolatedSpline.html">InterpolatedSpline</a></li><li><a href="PathBuilding.PathPoint.html">PathPoint</a></li><li><a href="PathBuilding.PathPointContext.html">PathPointContext</a></li><li><a href="PathBuilding.html#.PathSegment">PathSegment</a></li><li><a href="PathBuilding.Pipeline.BrushApplier.html">BrushApplier</a></li><li><a href="PathBuilding.Pipeline.ConvexHullChainProducer.html">ConvexHullChainProducer</a></li><li><a href="PathBuilding.Pipeline.CurvatureBasedInterpolator.html">CurvatureBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.DataProcessor.html">DataProcessor</a></li><li><a href="PathBuilding.Pipeline.DataSequenceProcessor.html">DataSequenceProcessor</a></li><li><a href="PathBuilding.Pipeline.DistanceBasedInterpolator.html">DistanceBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.PathProducer.html">PathProducer</a></li><li><a href="PathBuilding.Pipeline.PolygonMerger.html">PolygonMerger</a></li><li><a href="PathBuilding.Pipeline.PolygonSimplifier.html">PolygonSimplifier</a></li><li><a href="PathBuilding.Pipeline.Smoother.html">Smoother</a></li><li><a href="PathBuilding.Pipeline.SplineInterpolator.html">SplineInterpolator</a></li><li><a href="PathBuilding.Pipeline.SplineProducer.html">SplineProducer</a></li><li><a href="PathBuilding.PointerData.html">PointerData</a></li><li><a href="PathBuilding.Spline.html">Spline</a></li><li><a href="Rasterization.2D.Brush2D.html">Brush2D</a></li><li><a href="Rasterization.2D.BrushPrototype.html">BrushPrototype</a></li><li><a href="Rasterization.2D.InkCanvas2D.html">InkCanvas2D</a></li><li><a href="Rasterization.2D.OffscreenLayer2D.html">OffscreenLayer2D</a></li><li><a href="Rasterization.2D.ShapeFactory.html">ShapeFactory</a></li><li><a href="Rasterization.2D.StrokeRenderer2D.html">StrokeRenderer2D</a></li><li><a href="Rasterization.Layer.html">Layer</a></li><li><a href="Rasterization.WebGL.BrushGL.html">BrushGL</a></li><li><a href="Rasterization.WebGL.GLProgram.html">GLProgram</a></li><li><a href="Rasterization.WebGL.InkCanvasGL.html">InkCanvasGL</a></li><li><a href="Rasterization.WebGL.InkContext.html">InkContext</a></li><li><a href="Rasterization.WebGL.InkGLContext.html">InkGLContext</a></li><li><a href="Rasterization.WebGL.InkLayer.html">InkLayer</a></li><li><a href="Rasterization.WebGL.OffscreenCanvasGL.html">OffscreenCanvasGL</a></li><li><a href="Rasterization.WebGL.OffscreenLayerGL.html">OffscreenLayerGL</a></li><li><a href="Rasterization.WebGL.RectGL.html">RectGL</a></li><li><a href="Rasterization.WebGL.StrokeDrawContext.html">StrokeDrawContext</a></li><li><a href="Rasterization.WebGL.StrokeRendererGL.html">StrokeRendererGL</a></li><li><a href="Semantics.SemanticTriple.html">SemanticTriple</a></li><li><a href="Semantics.TripleStore.html">TripleStore</a></li><li><a href="Serialization.InkCodec.html">InkCodec</a></li><li><a href="Serialization.InkObjectDecoder.html">InkObjectDecoder</a></li><li><a href="Serialization.InkObjectEncoder.html">InkObjectEncoder</a></li><li><a href="Serialization.TypedArrayCodec.html">TypedArrayCodec</a></li><li><a href="Stroke.html">Stroke</a></li><li><a href="URIResolver.html">URIResolver</a></li></ul><h3>Interfaces</h3><ul><li><a href="InkInput.InkController.html">InkController</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-bundling.html">Webpack Configuration Manual</a></li><li><a href="tutorial-ink-rendering-pipeline.html">Ink Rendering Pipeline</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 15:38:16 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

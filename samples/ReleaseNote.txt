@@ -1,0 +1,448 @@
+==================================================================================================================================
+What’s new in Foxit PDF SDK for Web 8.0.0
+
+*****New Features and Updates*****
+
+•	Form Designer full support (PC platform only)  
+•	High Contrast support 
+•	Read Aloud is available for reading page’s text using either a built-in browser speech API or third party speech service 
+•	Chinese Traditional Localization support 
+•	Signature properties such as signing reason, date, location now available on context menu of signature fields 
+•	Optimized UIExtension.css size from 5179kb to 1512kb 
+•	Enhanced Acrobat JavaScript API support 
+•	Clipboard copied text now displayed as text annotation object instead of text object  
+•	The Returns of 'PDF.PDFForm.addControl()' was changed to object instead of boolean 
+
+*****New Methods and Classes*****
+
+-------------------PDFViewCtrl--------------
+•	New viewer events for monitoring actions before  page rendering and document loading.
+Relevant API:  ViewerEvents.beforeRenderPage, ***beforeLoadPDFDoc
+•	New parameter 'fileOpen.cipher' was added to viewer open methods to decrypt FileOpen PDFs encrypted with AES algorithm. 
+Relevant API: PDFViewer.openPDFByFile(); PDFViewer.openPDFByHttpRangeRequest() and PDFViewer.reopenPDFDoc()
+•	New viewer Class, interface and APIs for Read Aloud module.
+Relevant API and Module: PDFViewer.getReadAloudService, PDFViewCtrl.readAloud
+•	New ‘PDFViewer.addFontMaps()’ for adding custom fonts to the Font list.
+-------------------PDF----------------------
+•	New API ' PDFField.setFlags()' was added to set flags for form fields. 
+-------------------PDFUI--------------------
+•	New parameter 'autoDownloadAfterSign' was added to 'PDFUI.constructor' to control the download action once the current document is signed with a certificate-based signature. 
+•	A callback 'getSignedDocument' was added to 'PDFUI.constructor' to allow getting the signed document stream. 
+•	New 'PDFUI.setDefaultMeasurementRatio()' for specifying measurement ratio.
+•	New ‘PDFUI.waitForInitialization()’ for translating localization entries. 
+•	New ‘PDFUI.registerSignaturePropertyHandler()’ for customizing signature properties panel.
+
+*****Sample Projects*****
+
+•	New custom-font project which shows how to map a font and add it to the Font list for text editing. 
+•	New custom-measurement project for creating a custom measurement object. 
+•	New Integration project for React.js application created using create-react-app.  
+•	New project for pseudo-time progress bar.
+
+*****Bug Fixes*****
+
+1.	Fixed an issue where a PDF file with an oversized layout renders incorrectly in FitWidth mode. 
+2.	Fixed a crash issue on opening PDF files with size larger 150MB on mobile devices. 
+3.	Fixed a glyph rendering issue on a specific file.
+4.	Annotation count now works correctly on the 'getAnnotCount()' method.
+5.	Show/hide form field action responds correctly.
+6.	'PDFui.activateAnnotation' correctly activates and locates annotation on page. 
+7.	Change annotation rectangle with cloud style to solid now follows the object’s original geometry
+8.	Fixed an issue where exporting Dynamic Stamps as FDF causes an error message in Adobe Reader DC.
+9.	Fixed an issue with creation of new instances after destroying current in IE11.
+10.	Fixed issues where customizing thumbnail context-menu causes errors.
+11.	Linearized PDFs created by 'pdfdoc.getStream()' now can be opened in other PDF readers. 
+
+==================================================================================================================================
+What’s new in Foxit PDF SDK for Web 7.6.0
+
+*****Features*****
+
+Complete Web Viewer project was updated to add the following new features:
+•	Portfolio Support for viewing and downloading.
+•	Added Snap functionality to measurement tools, Line, Arrow, Polyline, Polygon and Cloud.
+•	Added First/Last page for page navigation. 
+•	Added a functionality to add bookmark while viewing a PDF.
+•	Added the functionality to drag and rotate a stamp.
+•	Added SendToBack and BringToFront to have the particular graphic object to draw on top or underneath of other page objects.   
+•	Added a Fields side-panel for displaying and managing form fields. 
+•	Added highlight Fields 
+•	New form field types for create/edit: Push button, CheckBox, Radio, ComboBox, ListBox, Image, Run Form Recognition and Form Assistant. 
+•	New 'Options' properties tab for form CheckBox, Radio and ListBox which can be used to set Button type and Export value.
+•	".\examples\PDFViewCtrl\create-annot" was updated to include code samples for creating Ink, Note and FreeText. 
+•	".\examples\UIExtension\collaboration" was added to present how to collaborate on annotations, page manipulation, document sharing, and user annotation permissions.  
+	Related class and API: PDFViewCtrl::collab, PDFViewer::collaborate(action,data) 
+•	New CodeSandBox Demo
+
+*****New Methods and Classes*****
+
+•	Support multiple page manipulation.
+	Related API: PDFDoc::rotatePages(), ***removePages(),***movePagesTo(), ***insertBlankPages()
+•	Support snap measurements to PDF shape objects’ points and paths. 
+	Related API: PDFViewer::setSnapMode,  ***getSnapMode(), PDFPage::getSnappedPoint()
+	Related Event: PDFViewCtrl.constants.ViewerEvents.snapModeChanged
+•	New functionality to read and write document/page dictionaries.
+	Related new class and APIs: PDFDictionary class,  PDFDoc.getInfo() and PDFPage.getDict().
+•	Support to get logical page labels.
+	Related API: PDFDoc.getPageLabels()
+•	New method was added to set the position of the particular page object. 
+	Related API: GraphicsObject::moveToPosition() 
+•	New method was added to set the width of the Eraser.
+	Related API: PDFViewer::setEraserSize()
+•	Support circle and square area measurements. 
+	Related API: PDF.annots.circle   ***square
+•	Support to create the same type of form fields continuously.
+	Related API: PDFViewer::setFormCreationContinuously()
+•	New method to manage the form properties dialog box visibility when a form field was created.
+	Related API: PDFUI::openFormPropertyBoxAfterCreated()
+•	New method to manage the form field rectangle focus visibility when the form fields have been selected.  
+	Related API: pdfViewer.setFormFieldFocusRectangleVisible()
+•	New option was added to PDFViewer constructor to show/hide form file tooltip. 
+	Related option: options.showFormFieldTooltip()
+•	New method was added to set tooltips for all form fields.
+	Related API: PDFViewer::addTooltipsForAllFormFields()
+•	Support Acrobat JS functions importAnFDF and exportAsFDF to import/export form data.
+•	Support Acrobat JS strokeColor to set the appearance of  annotation and form field to transparent.
+•	New action callback interface for custom implementation with Acrobat JavaScript.
+	Related API: PDFViewCtrl.pdfjs.ActionCallback
+•	New annotation mouse events mouseEnter and mouseLeave. 
+	Related Events:  PDFViewCtrl.constants.ViewerEvents.mouseEnter    ***mouseLeave
+•	New bookmark select event to watch the users bookmark selection. 
+	Related API: UIExtension.UIEvents.bookmarkSelected
+•	The tapPage, doubleTapPage and pressPage methods include an `e` parameter onevent object of hammer.js. 
+	Related events: ViewerEvents.tapPage(e); ***doubleTapPage(e); ***pressPage(e)
+•	The rightClickAnnotation adds an  `e` parameter for mouse event.
+	Related events: ViewerEvents.rightClickAnnotation(annotRender,e)
+•	The PDFDoc.sign() adds a new parameter 'image' for setting signature appearance.
+
+*****Updates *****
+•	Optimized the loading time for files with 5000+ annotations
+•	Enhanced SDK functionality so that users can build their viewer’s UI without using the UIExtension project.   
+	Related module:  PDFViewCtrl.add-ons
+•	New StateHandler classes for  splitting select Text & Annotation into two tools: Select Text and Select Annotation
+	Related API:  PDFViewCtrl.contants.STATE_HANDLER_NAMES. STATE_HANDLER_SELECT_TEXT_IMAGE     ***STATE_HANDLER_SELECT_ANNOTATION
+•	Enhanced SDK to support file:// protocol which is useful for native apps like Electron, HBuilderX packaged apps, ect.
+•	Disabled the pop-ups for static XFA Forms by ignoring XFA version check.
+•	Updated the annotation events for listening in to form widgets edits.
+	Related events:  PDFViewCtrl:constant.DataEvents.annotationAdded,  ***annotationRemoved, ***annotationUpdated,   ***activeAnnotation, and ***unActiveAnnotation.
+
+*****Bug Fixes*****
+
+•	Fixed touch screen issue on pages in PDFViewCtrl basic viewer mobile.
+•	Area measurement value update fails after modifying size corrected
+•	ComboBox unresponsive to mouse click  on specific files issue was fixed.
+•	xref table parsing not working on specific FDF files data import operation issue fixed 
+•	Signature validation working correctly on OpenPDFByHttpRangeRequest
+•	Fixed an issue on new added PDF signatures displayed incorrectly on a particular use case scenario. 
+•	Fixed setEnableJS issue on executing document open operation when method is set to false.
+•	Fixed an issue where Annotations fail to export "custom entries" to XFDF.
+•	Measurement annotation no longer truncated when being created on an re-sized page. 
+•	Bookmark page numbers correctly updated when Inserting a new page.
+•	Enhanced performance on toolbar items switch unusually laggy
+•	Empty JavaScript Actions on a file no longer causing issues on opening PDF documents
+•	Issues with "formValueChanged" method in specific documents were fully repaired.
+•	Rotated stamp annotations no longer cause issues on XFDF annotation data export.
+•	Hiding annotations on un-rendered pages completely supported. 
+•   Fixed a cross-site scripting security issue.
+
+===================================================================================================================================
+What’s new in Foxit PDF SDK for Web 7.5.0
+
+*****New Features*****
+
+*  New ‘Undo All’ method for undo/redo all annotations entered in a session 
+   Related API: `pdfui.callAddonAPI("UndoRedoAddon","undoAll")`
+*  Programmatically set image of screen annotation  
+   Related API : Screen.setImage
+*  Programmatically access and activate a specific annotation   
+   Related API:  PDFViewer.activateAnnotation
+*  New method for accessing annotation’s PDF dictionary to and storing custom data to the annotation
+   Related APIs: `setDictionaryEntry(key,value)` and `getDictionaryEntry(key)`
+*  Enable/disable tooltips on mouse hover on annotation
+   Related option: PDFViewer.options.showAnnotTooltip
+*  New event for listening when an annotation's position changes
+   Related event: annotationMovedPosition 
+*  New classes were added to better work with widget annotations and control form fields 
+   Related classes: PDF.annots.Widget,  PDF.Form.PDFControl
+*  New Form data formats supported: CSV and TXT.
+   Related API: `PDFDoc.importFormFromFile()` and `PDFDoc.exportFormToFile()`
+*  Enable/disable form field automatic calculation 
+   Related API: PDFViewer.setAutoCalculateFieldsFlag
+*  Programmatically show print dialog box
+   Related API: `pdfui.callAddonAPI("PrintUIXAddon","showPrintDialog")`
+*  New event triggered  when an ink signature image is selected
+   Related Event: `UIExtension.UIEvents.InkImageSelected` 
+*  New methods to access and set header/footer underline.
+   Related APIs: HeaderFooter.setUnderline, HeaderFooter.getUnderline
+*  New Features were added to the web viewer's UI 
+   * New zoom mode `Fit Visible` 
+   * Sort annotations by properties such as Page, Type, Author, Date, Status, Check Status  
+   * Filter comments by status and author
+   * New editing capabilities to the following form field properties:
+     * Set tooltip 
+     * Set flags: Visible, Hidden, Visible but unprintable, Hidden but printable
+     * Set direction: Right-to-Left and Left-to-Right
+     * Set text field properties: Text Rotation, Font Size/Color and Type (14 standard font types)
+     * Set actions after placing a signature by adding a new Signed tab
+   * Copy/Cut/Paste the selected form field
+   * Shortcut keys for form fields
+     * Arrow keys Up/Left/Down/Right for navigating Radio buttons in a group
+     * Enter key to activate/deactivate the current form field
+	
+*****Updates*****
+
+*  doubleTapPage event updated to pass mouse associated information  
+   Original event:  pdfViewer.eventEmitter.on(ViewerEvents.doubleTapPage, () =>{ })
+   New event: pdfViewer.eventEmitter.on(ViewerEvents.doubleTapPage, (e) =>{ })
+*  When a module e.g. Redaction is not licensed, its related API is notaccessible, and related UI features at UI level are hidden.  
+*  Updated pencil annotation methodPDFViewer.setPencilDrawingTimeout parameters to accept '0’ as a value
+*  Updated method setFormHighlightColor to highlight required fields 
+   Original API: setFormHighlightColor(color)
+   New API: setFormHighlightColor(color, requiredColor)
+  
+*****Bug Fixes*****
+
+*  Customized stamp icon becomes stretched in the stamp list  
+*  Event nottriggered when calling methods tapAnnotation, doubleTapAnnotation, rightclickAnnotion or pressAnnotation.
+*  The content of the Textbox truncated after increasing border width
+*  Signature appearance displayed incorrectly on  specific files
+*  Some form fields recognized incorrectly on specific files
+*  Viewer UI flickered when an incorrect password entered in a password protected file 
+*  Failed to add Callout annotation on a specific file
+*  Watermark displayed incorrectly when rendered multiple times
+
+
+=====================================================================================================================================
+What’s new in Foxit PDF SDK for Web 7.4.0
+
+*****New Features*****
+
+* Import and export ink signature list.
+  Related APIs: pdfViewer.getInkSignList(); pdfViewer.setInkSignList()
+* Set the default state tool to a particular stamp by using the new PDFUI constructor option or method.   
+  Related option: PDFUI.constructor ([options.customs.handlerParams])
+  Related API: PDFViewCtrl.StateHandlerManager.switchTo(stamp,{category:"",name:""})
+* Check, Enable and disable hotkey by using the new constructor option or method.   
+  Related option: pdfViewer.constructor([options.enableShortcutKey=true])
+  Related APIs: pdfViewer.setEnableShortcutKey(), pdfViewer.isShortcutKeyEnabled()
+* Get a page's box information and check for cropped page.
+  Related APIs: pdfPage.isCropped(); pdfPage.getPageBox()
+* Configure default print options. 
+  Related API: pdfviewer.setDefaultPrintSetting()
+* Unmount the iFrame DOM running PDF JavaScript by configuring the PDFViewer constructor option. Value is set to false by default. Use true value if you don’t want the JavaScript code to be called using iframe.
+  Related option: pdfViewer.constructor([options.noJSFrame=false])
+* Change the PDF text background and foreground display color.  
+  Related API: pdfviewer.setDocReadColor()
+* Load image as document object.  
+  Related API: pdfViewer.convertImageToPDFDoc()
+* Support rotation and event handling.  
+  Related APIs PDFViewer.rotateTo(); PDFViewer.getRotation(); ViewerEvents.afterDocumentRotation  
+* New methods to set form field highlight color and enable/disable form field highlight.  
+  Related APIs: pdfviewer.setFormHighlightColor(); pdfviewer.highlightForm(boolean)
+* New method for pre-setting pencil drawing object time. 
+  Related API: pdfviewer.setPencilDrawingTimeOut()
+* New classes and methods for working with and managing PDF objects programmatically. 
+  Related new Classes: PDF.GraphicsObject; PDF.ImageObject; PDF.TextObject; PDF.PathObject
+  Related APIs: PDFPage.getGraphicsObjectsInRect(); PDFPage.getGraphicsObjectAtPoint(); PDFPage.getGraphicsObjectsCount(); PDFPage.addGraphicsObject(); PDFPage.removeGraphicsObject();
+  Related Event: DataEvents.graphicsUpdated()
+* New constructor option to display comment list or not when a markup annotation was created.
+  Related option: PDFViewer.constructor.showCommentList
+*  New Features at UIExtension module：
+    * New <gtab> component
+	* New method to make it easier to create controller class. 
+	  Related API:UIXModule.prototype.controller(name, def)
+	* New method to create custom appearance.
+	  Related API: Appearance.extend(def, statics)
+*  New features were added to the web viewer’s UI:
+	* New Signature field control. 
+	* New Form text field control.
+	* New measurement tools `Perimeter, Polygon area and Circle area`.
+	* New view Rotate options on right-click context menu.
+	* New PDF text color view mode control.
+	* Drag and drop annotation’s across pages feature.  
+	* Support displaying annotation contents on mouse hover action.   
+        * Support load image file directly.
+	* Audio player now supports pause option. 
+	* New language localization support: Japanese and Korean.
+	
+*****Updates*****
+
+*  Change the name of parameter `annotJson` to `annotsJson` in `PDFViewer.openPDFByHttpRangeRequest` and `PDFViewer.reopenPDFDoc`.
+*  The advanced_webViewer was removed from the SDK package. It was replaced with complete_webViewer.
+*  The Form import&export tool were moved to Form tab from the Home tab.
+*  New `allInOne.mobile.js` file for mobile to load all addons using a single js file. 
+*  The thumbnails `uix-addons` module has been made open source for specific customers, not released to general availability
+*  Deprecated: Deprecate PDFUI options `template and fragments`, replace them with Appearance. 
+
+*****Enhancements*****
+
+*  Optimized mobile pinch zoom touch screen performance. 
+*  Enhanced PDF JavaScript support: document print action and OCG object. 
+*  Enhanced pdfField.setAction to support AdditionalAction. 
+ 	Related APIs: setAction(type,data){} was updated to setAction(trigger, action){}
+ 	Related constants: PDF.constant.Action_Trigger; PDF.constant.Action.Box_Type 
+*  Enhanced document open workflow by separating document loading and rendering logic.
+ 	Related APIs:  
+ 	pdfViewer.renderDoc; pdfViewer.openPDFByFile(file,{isRenderOnDocLoaded:false}); pdfViewer. openPDFByHttpRangeRequest(request,{isRenderOnDocLoaded:false}); pdfViewer.openPDFById(); pdfViewer.createNewDoc(,{isRenderOnDocLoaded:false})
+*  Enhanced stamp functionality to support blob url/base64 data source, and allow users to add/edit custom stamps and change time format of dynamic stamp.
+	Related new APIs: 
+ 	pdfViewer.initAnnotationIcons(icons): Sets the custom initial stamps list. The default stamp list will be replaced. 
+ 	pdfViewer.addAnnotationIcon(icon): Adds a single custom stamp.
+ 	pdfViewer.removeAnnotationIcon(type,category,name):Removes a single custom stamp.
+ 	pdfui.getAnnotationIcons(annotType,onlyCustomized):Gets the custom stamps. 
+ 	pdfui.getAnnotationIcons('stamp',true);
+ 	pdfViewer.setFormatOfDynamicStamp(seperator,timeFormat):Configures the time format for the dynamic stamp.
+*  Enhanced the Digital Signature solution.
+	Related API: PDFUI.registerSignHandler(signerInfo); PDFUI.setVerifyHandler(verifyFunction); PDFDoc.sign(signInfo,digestSignHandler); PDFDoc.verifySignature(signatureField, verifyHandler)
+	New class: PDFSignature
+
+*****Bug Fixes*****
+
+*  Barcode was not updated when document print action was triggered
+* `openPDFByHttpRangeRequest()` did’t trigger error  on incorrect URLs. 
+*  Pencil drawing data loss after import/export to FDF format on pages containing stamp annotations. 
+*  Text displayed incorrectly on rotated pages.
+* `getCurrentPageIndex()` didn’tget correct page number in a visible area. 
+*  Thumbnail and page index did not update after importing documents with API `PDFDoc.insertPage()`.
+*  Bookmark could not be deleted after being inserted by  PDFBookmark.insertbookmark.
+*  Comments were  disabled in a signed document with comments permission.
+*  Tab key always jump back to the first page when using Tab key to view a form file. 
+*  Font not rendered correctly in a combo box form field. 
+*  MarkupAnnot.getReviewStateCount and MarkupAnnot.GetReviewStates always return 1 regardless of having more than 1 review states.
+*  STATE_HANDLER_CREATE_FREETEXT_CALLOUT could not be created when using template 
+*  Callout annotation displayed incorrectly after being moved in a particular file. 
+*  SubmitForm action generated incorrect execution..
+*  Parts of images were inaccessible or hidden when rotated.
+*  Form field inaccessible  in specific form files when document is loaded17. `PDFViewCtrl.ViewerEvents.rightClickAnnotation` fails to trigger in specific scenarios.
+*  Form controls get lost when new form pages were inserted in document. 
+*  Combo box printed in the output file issue.   
+
+==================================================================================================================================
+What’s new in Foxit PDF SDK for Web 7.3.0?
+
+*****New Features*****
+
+•	Added progressive rendering support.
+•	Added API to get font information including font type,name, embedded info etc.
+•	Added multiple selection and edit function on content objects at UIExtension.
+•	Added a PDF.actions class.
+•	Added getActions and setActions API for PDF.annots.Link annotation.
+•	Added digital signature support.
+•	Added a new PDFViewer.constructor option jr.brotli
+•	Added new PDFUI.constructor option customs.getLoadingMode to allow loading PDF document from memory buffer.
+•	Added a new PDFViewer.constructor option renderingMode
+•	Added a new parameter annotUpdatedType to DataEvents.annotationUpdated to distinguish contents from other changes on annotations. In the past, when the annotation content is added or updated straightly on a page, developers have no way to detect if content has been changed or not.
+•	Added pdfviewer.killFocus() API.
+•	Added pdfui.confirm(), pdfui.alert(), and pdfui.prompt() with message and log type to classify the UI pop-up component. In the past, FoxitPDFSDK for Web only has one message type, which is hard for application level developer to customize UI dialog.
+•	Updated UI thumbnail component and modularized it as an add-on to allow developers to do customization and extend its functionality.
+•	Added an open source scaffold example project .
+•	Added show/hide all comments at UI level.
+•	Added PDFUI.callAddon()API at UI level.
+•	Added a paddle component in layout template to show the hidden elements on toolbar (PC only).
+•	Added addon merge tools for preprocessing addon resources to reduce the network requests at the UI initialization.
+•	Added UIExtension.vw.cssfile to support vmin CSS unit to adapt layout for cases that require font resizing on mobile.
+•	Added PDF.HeaderFooter.isEmpty()API.
+
+*****Updates*****
+
+•	Updated the PDFViewCtrl.ViewerEvents.removeActionAnnotationSuccess logic that once it was triggered, the annotation would be destroyed and no properties can be retrieved. For cases that requires to listen in removed annotations, PDF.DataEvents.annotationRemoved should be used instead.
+•	Removed UIExtension.full.css that functions same as UIExtension.css.
+•	Updated the output information on console.
+•	Updated hot key for annotation undo ( command+z) and redo (command+shift+z) on Mac at UI level.
+•	Updated Vue/Angular/React integration sample to use merged-addons.
+•	Updated the return value of the PDFPage.addImage(). In the past this method returns Promise, now it returns Promise.
+•	Updated PDFDoc.exportAnnotsToPDF API which now supports exporting a particular annotation to data file.
+•	Updated WebPDFJRWorker.jsto allow accessing from a different origin.
+•	Updated PDF.constant.Error_Codeenumerations in API references.
+•	Updated the docfolder to doc-websitewith HTML format developer guide.
+
+
+*****Bug Fixes*****
+
+•	Fixed an issue where the Edit menu in Comment List wasn't disabled after the annotations flag was set as locked.
+•	Fixed an issue where creating annotation would trigger both annotationAdded and annotationUpdated events.
+•	Fixed an issue where a new added custom stamp data can't be updated when being placed on the page.
+•	Fixed an issue where passing annotation color=0x000000 on border and text, did not take effect.
+•	Fixed an issue where the JSON data was inconsistent between exportAnnotsToJSON and addAnnot
+•	Fixed an issue where the URL file cannot be opened cross origin.
+•	Fixed an issue which the callout failed to create on a particular file.
+•	Fixed an issue which the date format got changed on focus and on blur.
+•	Fixed an issue which no comments could be imported when comments contains parenthesis.
+•	Fixed an issue where uncaught promise error occurred when importing annotation.
+•	Fixed an issue which the text form field can't set to be blank if a default value has been set.
+•	Fixed an issue where importAnnotsFromJson could not update the old annotation when two annotations have same ID.
+•	Fixed an issue that FoxitPDFSDK for Web failed to display the default appearance of a 3D annotation.
+•	Fixed an issue where tooltip shows only when the cursor points to the left-top corner of the tool on Firefox.
+•	Fixed an issue the FoxitPDFSDK for Web failed to open files in IE10.
+•	Fixed an issue that the rendering delayed when adding highlight annotation.
+•	Fixed an issue that FoxitPDFSDK for Web failed to open particular drawing files.
+•	Fixed an issue where 404 Error occurred when loading a file in Angular.js.
+•	Fixed an issue where FoxitPDFSDK for Web keeps loading when open a particular file.
+•	Fixed an issue where the mirror field cannot be cleared when the length is less than 2 in the main field.
+
+
+========================================================================================================
+What’s new in Foxit PDF SDK for Web 7.3.0?
+
+*****New Features*****
+•	Added progressive rendering support.
+•	Added API to get font information including font type,name, embedded info etc.
+•	Added multiple selection and edit function on content objects at UIExtension.
+•	Added a PDF.actions class.
+•	Added getActions and setActions API for PDF.annots.Link annotation.
+•	Added digital signature support.
+•	Added a new PDFViewer.constructor option jr.brotli
+•	Added new PDFUI.constructor option customs.getLoadingMode to allow loading PDF document from memory buffer.
+•	Added a new PDFViewer.constructor option renderingMode
+•	Added a new parameter annotUpdatedType to DataEvents.annotationUpdated to distinguish contents from other changes on annotations. In the past, when the annotation content is added or updated straightly on a page, developers have no way to detect if content has been changed or not.
+•	Added pdfviewer.killFocus() API.
+•	Added pdfui.confirm(), pdfui.alert(), and pdfui.prompt() with message and log type to classify the UI pop-up component. In the past, FoxitPDFSDK for Web only has one message type, which is hard for application level developer to customize UI dialog.
+•	Updated UI thumbnail component and modularized it as an add-on to allow developers to do customization and extend its functionality.
+•	Added an open source scaffold example project .
+•	Added show/hide all comments at UI level.
+•	Added PDFUI.callAddon()API at UI level.
+•	Added a paddle component in layout template to show the hidden elements on toolbar (PC only).
+•	Added addon merge tools for preprocessing addon resources to reduce the network requests at the UI initialization.
+•	Added UIExtension.vw.cssfile to support vmin CSS unit to adapt layout for cases that require font resizing on mobile.
+•	Added PDF.HeaderFooter.isEmpty()API.
+
+*****Updates*****
+
+•	Updated the PDFViewCtrl.ViewerEvents.removeActionAnnotationSuccess logic that once it was triggered, the annotation would be destroyed and no properties can be retrieved. For cases that requires to listen in removed annotations, PDF.DataEvents.annotationRemoved should be used instead.
+•	Removed UIExtension.full.css that functions same as UIExtension.css.
+•	Updated the output information on console.
+•	Updated hot key for annotation undo ( command+z) and redo (command+shift+z) on Mac at UI level.
+•	Updated Vue/Angular/React integration sample to use merged-addons.
+•	Updated the return value of the PDFPage.addImage(). In the past this method returns Promise, now it returns Promise.
+•	Updated PDFDoc.exportAnnotsToPDF API which now supports exporting a particular annotation to data file.
+•	Updated WebPDFJRWorker.jsto allow accessing from a different origin.
+•	Updated PDF.constant.Error_Codeenumerations in API references.
+•	Updated the docfolder to doc-websitewith HTML format developer guide.
+
+
+*****Bug Fixes*****
+
+•	Fixed an issue where the Edit menu in Comment List wasn't disabled after the annotations flag was set as locked.
+•	Fixed an issue where creating annotation would trigger both annotationAdded and annotationUpdated events.
+•	Fixed an issue where a new added custom stamp data can't be updated when being placed on the page.
+•	Fixed an issue where passing annotation color=0x000000 on border and text, did not take effect.
+•	Fixed an issue where the JSON data was inconsistent between exportAnnotsToJSON and addAnnot
+•	Fixed an issue where the URL file cannot be opened cross origin.
+•	Fixed an issue which the callout failed to create on a particular file.
+•	Fixed an issue which the date format got changed on focus and on blur.
+•	Fixed an issue which no comments could be imported when comments contains parenthesis.
+•	Fixed an issue where uncaught promise error occurred when importing annotation.
+•	Fixed an issue which the text form field can't set to be blank if a default value has been set.
+•	Fixed an issue where importAnnotsFromJson could not update the old annotation when two annotations have same ID.
+•	Fixed an issue that FoxitPDFSDK for Web failed to display the default appearance of a 3D annotation.
+•	Fixed an issue where tooltip shows only when the cursor points to the left-top corner of the tool on Firefox.
+•	Fixed an issue the FoxitPDFSDK for Web failed to open files in IE10.
+•	Fixed an issue that the rendering delayed when adding highlight annotation.
+•	Fixed an issue that FoxitPDFSDK for Web failed to open particular drawing files.
+•	Fixed an issue where 404 Error occurred when loading a file in Angular.js.
+•	Fixed an issue where FoxitPDFSDK for Web keeps loading when open a particular file.
+•	Fixed an issue where the mirror field cannot be cleared when the length is less than 2 in the main field.
+
+
+
+

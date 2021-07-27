@@ -1,0 +1,13 @@
+{
+    "buttons": {
+        "addText": "添加文本域",
+        "show-dialog": "显示对话框"
+    },
+    "dialog": {
+        "title": "对话框标题",
+        "close": "关闭"
+    },
+    "toolbar":{
+        "title":"新标题"
+    }
+}

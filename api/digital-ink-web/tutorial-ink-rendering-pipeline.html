@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Tutorial: Ink Rendering Pipeline</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Tutorial: Ink Rendering Pipeline</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>Ink Rendering Pipeline</h2>
+</header>
+
+<article>
+    <h3><strong>Overview</strong></h3>
+<hr>
+<h3><center><img src="./images/Pipeline.png" alt="Spline"></center></h3>
+<p>WILL 3.0 is a pipeline, consisted of a chain of processing blocks (processors, producers, etc.). The input of the pipeline is pointer (touch, stylus, mouse) data, which passes through a set of processing stages. The output of each stage is taken as input by its successor. The main goal of the pipeline is to create digital ink. However, its generic implementation allows much broader set of capabilities.</p>
+<h3><strong>Input</strong></h3>
+<hr>
+<ul>
+<li><strong>Position</strong> - defined by <strong>x</strong> and <strong>y</strong> coordinates - the position of the input point.</li>
+<li><strong>Phase</strong> - the phase of the input (<strong>Begin, Update/Move, End</strong>).</li>
+<li><strong>Timestamp</strong> - the timestamp of the input, used to calculate velocity.</li>
+<li><strong>Pressure</strong> - [OPTIONAL] - a.k.a pressure, the value reported by a pressure sensitive stylus/display.</li>
+<li><strong>Radius</strong> - [OPTIONAL] - the size of the touch input.</li>
+<li><strong>Altitude Angle</strong> -  [OPTIONAL] - the angle between the input device and plane of writing. Measured in radians - between 0 and π/2.</li>
+<li><strong>Azimuth Angle</strong> - [OPTIONAL] - the angular distance along the plane of writing to the location of the object. By convention, azimuth is measured from top towards bottom (north towards east) along the plane. Measured in radians - between 0 and 2π.</li>
+</ul>
+<h3><center><img src="./images/AzimuthDiagram.png" alt="AzimuthDiagram"></center></h3>
+<h3><strong>Internal Representation and Models</strong></h3>
+<hr>
+<ul>
+<li><strong>Pointer Data</strong> - (a.k.a Input Data/Touch Data) - the input in the format described above</li>
+<li><strong>PathPoint</strong> - the internal representation of point</li>
+<li><strong>Path</strong> - Flat set of PathPoints, each of which is computed by calculator which can be either predefined or passed from outside.</li>
+</ul>
+<h3><center><img src="./images/Path.png" alt="Path"></center></h3>
+<ul>
+<li><strong>Layout</strong> - the descriptor of the items in each path point.</li>
+<li><strong>Spline</strong> - centripetal Catmull–Rom spline, defined by its control points</li>
+</ul>
+<h3><center><img src="./images/Spline.png" alt="Spline"></center></h3>
+<ul>
+<li><strong>Point Set*</strong> - a set of points that define a filled area with specific form (not just a point)</li>
+</ul>
+<h3><center><img src="./images/Points.png" alt="Points"></center></h3>
+<ul>
+<li><strong>Polygon</strong> - polygons are created from Point Sets using convex-hull. The polygon is Collection<DIPoint2>.</li>
+</ul>
+<h3><center><img src="./images/Polygon.png" alt="Polygon"></center></h3>
+<p><strong>Data Classes:</strong></p>
+<ul>
+<li><strong>DIPoint2</strong> - 2D point with x and y coordinates</li>
+<li><strong>DIPoint3</strong> - 3D point with x, y and z coordinates</li>
+<li><strong>DIPoint4</strong> - 3D point with x,y,z coordinates and width</li>
+<li><strong>DIPointList2D</strong> - Collection<DIPoint2></li>
+<li><strong>DIPolyline</strong> - Collection<DIPoint2></li>
+</ul>
+<p><em>*In our case we use simple brush that is defined by its hull and not by a point set.</em></p>
+<h3><strong>Pipeline</strong></h3>
+<hr>
+<p><strong>BaseDataProcessor</strong></p>
+<p>The base class is inherited by all the pipeline stages.</p>
+<p>It defines two abstract methods:</p>
+<ul>
+<li>add(phase: Phase, addition: Input, prediction: Input): Pair&lt;Output, Output&gt;</li>
+<li>reset()</li>
+</ul>
+<p><strong>PathProducer</strong></p>
+<p>Converts the input into internal path representation based on the supplied layout.</p>
+<p>Constructor Parameters (wrapped into a Config class):</p>
+<ul>
+<li>Layout</li>
+<li>Calculator - lambda function that converts the input into Path Point</li>
+</ul>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - InputData - the input which we want to process</li>
+<li>Prediction - InputData - a prediction for a future input</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Path as Collection<Float></li>
+<li>Prediction - Path as Collection<Float></li>
+</ul>
+<p><strong>Smoother</strong></p>
+<p>Makes the path smoother via Double Exponential Smoothing. A negative result of the smoothing is that the result lags with one point.</p>
+<p>Constructor Parameters:</p>
+<ul>
+<li>The size of the layout (used as stride for processing the input)</li>
+</ul>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - Collection<Float> -the path generated by the TouchToPathProducer</li>
+<li>Prediction - Collection<Float>- the prediction path generated by the TouchToPathProducer</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Path as Collection<Float></li>
+<li>Prediction - Path as Collection<Float></li>
+</ul>
+<p><strong>SplineProducer</strong></p>
+<p>Adds two control points, one in the beginning and one at the end of the path in order to produce Catmull-Rom spline.</p>
+<p>Constructor Parameters:</p>
+<ul>
+<li>The size of the layout (used as stride for processing the input)</li>
+</ul>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - Collection<Float> - the path</li>
+<li>Prediction - Collection<Float>- the prediction path</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Spline as Collection<Float></li>
+<li>Prediction - Spline as Collection<Float></li>
+</ul>
+<p><strong>SplineInterpolator</strong></p>
+<p>Discretizes the spline by adding points along its trajectory, spaced out according to the spacing parameters.</p>
+<p>Constructor Parameters:</p>
+<ul>
+<li>Layout</li>
+<li>Spacing - the spacing between two consecutive as a multiplier (fraction if below 1) of the size</li>
+<li>Split Count - the amount of splits</li>
+</ul>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - Collection<Float> - the spline</li>
+<li>Prediction - Collection<Float>- the prediction spline</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Spline as Collection<Float></li>
+<li>Prediction - Spline as Collection<Float></li>
+</ul>
+<p><strong>BrushApplier</strong></p>
+<p>Converts the spline into a collection of point sets, by replacing the points with <strong>brush polygons</strong>.</p>
+<p>Constructor Parameters:</p>
+<ul>
+<li>Layout</li>
+<li>Brush Polygon - the polygon that defines the brush</li>
+</ul>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - Collection<Float> - the spline</li>
+<li>Prediction - Collection<Float>- the prediction spline</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Collection<DIPointList2D></li>
+<li>Prediction - Collection<DIPointList2D></li>
+</ul>
+<p><strong>ConvexHullChainProducer</strong></p>
+<p>Creates a <strong><a href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a></strong> around each two consecutive point sets, using the <a href="https://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain">monotone chain</a> algorithm.</p>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - Collection<DIPointList2D> - the collection of point sets</li>
+<li>Prediction - Collection<DIPointList2D> - the prediction collection of point sets</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Collection<DIPolygon></li>
+<li>Prediction - Collection<DIPolygon></li>
+</ul>
+<p><strong>PolygonMerger</strong></p>
+<p>Merges polygons using Union. Uses the <a href="http://www.angusj.com/delphi/clipper.php">Clipper library</a> and its respective ports in the different platforms.</p>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - Collection<DIPolygon> - the collection polygons generated by the ConvexHullChainProducer</li>
+<li>Prediction - Collection<DIPolygon> - the prediction collection polygons generated by the ConvexHullChainProducer</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Collection<DIPolygon></li>
+<li>Prediction - Collection<DIPolygon></li>
+</ul>
+<p><strong>PolygonSimplifier</strong></p>
+<p>Takes the curve composed of line segments (polygons) and finds a similar curve with fewer points, using the <a href="https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm">Ramer–Douglas–Peucker algorithm</a>.</p>
+<p>Constructor Parameters:</p>
+<ul>
+<li>Epsilon - the dissimilarity threshold</li>
+</ul>
+<p>Add parameters:</p>
+<ul>
+<li>Addition - Collection<DIPolygon> - the collection simplified polygons</li>
+<li>Prediction - Collection<DIPolygon> - the prediction collection simplified polygons</li>
+</ul>
+<p>Output:</p>
+<ul>
+<li>Addition - Collection<DIPolygon></li>
+<li>Prediction - Collection<DIPolygon></li>
+</ul>
+<h3><strong>Visual Representation of the Pipeline</strong></h3>
+<hr>
+<h3><center>Input</center></h3>
+<h3><center><strong>↓</strong></center></h3>
+<h3><center>PathProducer</center></h3>
+<h3><center style="width: 50%; margin-left: 25%;"><img src="./images/Pipeline.RawData.png" alt="RawData" title="RawData"></center></h3>
+<h3><center>↔ Smoother</center></h3>
+<h3><center><strong>↓</strong></center></h3>
+<h3><center>SplineProducer</center></h3>
+<h3><center style="width: 50%; margin-left: 25%;"><img src="./images/Pipeline.RawSpline.png" alt="RawSpline" title="RawSpline"></center></h3>
+<h3><center><strong>↓</strong></center></h3>
+<h3><center>SplineInterpolator</center></h3>
+<h3><center style="width: 50%; margin-left: 25%;"><img src="./images/Pipeline.InterpolatedSpline.png" alt="InterpolatedSpline" title="InterpolatedSpline"></center></h3>
+<h3><center><strong>↓</strong></center></h3>
+<h3><center>BrushApplier</center></h3>
+<h3><center style="width: 50%; margin-left: 25%;"><img src="./images/Pipeline.BrushSpline.png" alt="Collection of Point Sets" title="Collection of Point Sets"></center></h3>
+<h3><center><strong>↓</strong></center></h3>
+<h3><center>ConvexHullChainProducer</center></h3>
+<h3><center style="width: 50%; margin-left: 25%;"><img src="./images/Pipeline.HullSpline.png" alt="Collection of Polygons" title="Collection of Polygons"></center></h3>
+<h3><center><strong>↓</strong></center></h3>
+<h3><center>PolygonMerger</center></h3>
+<h3><center style="width: 50%; margin-left: 25%;"><img src="./images/Pipeline.PolygonSpline.png" alt="Polygon" title="Polygon"></center></h3>
+<h3><center><strong>↓</strong> <strong>↑</strong></center></h3>
+<h3><center>PolygonSimplifier</center></h3>
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-fsx.html">fsx</a></li><li><a href="module-math.html">math</a></li></ul><h3>Namespaces</h3><ul><li><a href="Generic.html">Generic</a></li><li><a href="InkInput.html">InkInput</a></li><li><a href="InkModel.html">InkModel</a></li><li><a href="Manipulation.html">Manipulation</a></li><li><a href="PathBuilding.html">PathBuilding</a></li><li><a href="PathBuilding.Pipeline.html">Pipeline</a></li><li><a href="Rasterization.html">Rasterization</a></li><li><a href="Rasterization.2D.html">2D</a></li><li><a href="Rasterization.WebGL.html">WebGL</a></li><li><a href="Semantics.html">Semantics</a></li><li><a href="Serialization.html">Serialization</a></li></ul><h3>Classes</h3><ul><li><a href="Generic.Color.html">Color</a></li><li><a href="Generic.Identifiable.html">Identifiable</a></li><li><a href="Generic.Matrix.html">Matrix</a></li><li><a href="Generic.Point.html">Point</a></li><li><a href="Generic.Rect.html">Rect</a></li><li><a href="InkInput.Environment.html">Environment</a></li><li><a href="InkInput.InkInputProvider.html">InkInputProvider</a></li><li><a href="InkInput.InputContext.html">InputContext</a></li><li><a href="InkInput.InputDevice.html">InputDevice</a></li><li><a href="InkInput.Scalar.html">Scalar</a></li><li><a href="InkInput.SensorChannel.html">SensorChannel</a></li><li><a href="InkInput.SensorChannelsContext.html">SensorChannelsContext</a></li><li><a href="InkInput.SensorContext.html">SensorContext</a></li><li><a href="InkInput.SensorData.html">SensorData</a></li><li><a href="InkInput.SensorStream.html">SensorStream</a></li><li><a href="InkModel.Element.html">Element</a></li><li><a href="InkModel.Group.html">Group</a></li><li><a href="InkModel.InkNode.html">InkNode</a></li><li><a href="InkModel.Path.html">Path</a></li><li><a href="InkModel.View.html">View</a></li><li><a href="InputListener.html">InputListener</a></li><li><a href="Manipulation.Intersector.html">Intersector</a></li><li><a href="Manipulation.Manipulator.html">Manipulator</a></li><li><a href="Manipulation.Selector.html">Selector</a></li><li><a href="Manipulation.SpatialContext.html">SpatialContext</a></li><li><a href="PathBuilding.ConvexHullProducer.html">ConvexHullProducer</a></li><li><a href="PathBuilding.InkBuilder.html">InkBuilder</a></li><li><a href="PathBuilding.InkBuilderAbstract.html">InkBuilderAbstract</a></li><li><a href="PathBuilding.InkBuilderAsync.html">InkBuilderAsync</a></li><li><a href="PathBuilding.InkPath2D.html">InkPath2D</a></li><li><a href="PathBuilding.InterpolatedSpline.html">InterpolatedSpline</a></li><li><a href="PathBuilding.PathPoint.html">PathPoint</a></li><li><a href="PathBuilding.PathPointContext.html">PathPointContext</a></li><li><a href="PathBuilding.html#.PathSegment">PathSegment</a></li><li><a href="PathBuilding.Pipeline.BrushApplier.html">BrushApplier</a></li><li><a href="PathBuilding.Pipeline.ConvexHullChainProducer.html">ConvexHullChainProducer</a></li><li><a href="PathBuilding.Pipeline.CurvatureBasedInterpolator.html">CurvatureBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.DataProcessor.html">DataProcessor</a></li><li><a href="PathBuilding.Pipeline.DataSequenceProcessor.html">DataSequenceProcessor</a></li><li><a href="PathBuilding.Pipeline.DistanceBasedInterpolator.html">DistanceBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.PathProducer.html">PathProducer</a></li><li><a href="PathBuilding.Pipeline.PolygonMerger.html">PolygonMerger</a></li><li><a href="PathBuilding.Pipeline.PolygonSimplifier.html">PolygonSimplifier</a></li><li><a href="PathBuilding.Pipeline.Smoother.html">Smoother</a></li><li><a href="PathBuilding.Pipeline.SplineInterpolator.html">SplineInterpolator</a></li><li><a href="PathBuilding.Pipeline.SplineProducer.html">SplineProducer</a></li><li><a href="PathBuilding.PointerData.html">PointerData</a></li><li><a href="PathBuilding.Spline.html">Spline</a></li><li><a href="Rasterization.2D.Brush2D.html">Brush2D</a></li><li><a href="Rasterization.2D.BrushPrototype.html">BrushPrototype</a></li><li><a href="Rasterization.2D.InkCanvas2D.html">InkCanvas2D</a></li><li><a href="Rasterization.2D.OffscreenLayer2D.html">OffscreenLayer2D</a></li><li><a href="Rasterization.2D.ShapeFactory.html">ShapeFactory</a></li><li><a href="Rasterization.2D.StrokeRenderer2D.html">StrokeRenderer2D</a></li><li><a href="Rasterization.Layer.html">Layer</a></li><li><a href="Rasterization.WebGL.BrushGL.html">BrushGL</a></li><li><a href="Rasterization.WebGL.GLProgram.html">GLProgram</a></li><li><a href="Rasterization.WebGL.InkCanvasGL.html">InkCanvasGL</a></li><li><a href="Rasterization.WebGL.InkContext.html">InkContext</a></li><li><a href="Rasterization.WebGL.InkGLContext.html">InkGLContext</a></li><li><a href="Rasterization.WebGL.InkLayer.html">InkLayer</a></li><li><a href="Rasterization.WebGL.OffscreenCanvasGL.html">OffscreenCanvasGL</a></li><li><a href="Rasterization.WebGL.OffscreenLayerGL.html">OffscreenLayerGL</a></li><li><a href="Rasterization.WebGL.RectGL.html">RectGL</a></li><li><a href="Rasterization.WebGL.StrokeDrawContext.html">StrokeDrawContext</a></li><li><a href="Rasterization.WebGL.StrokeRendererGL.html">StrokeRendererGL</a></li><li><a href="Semantics.SemanticTriple.html">SemanticTriple</a></li><li><a href="Semantics.TripleStore.html">TripleStore</a></li><li><a href="Serialization.InkCodec.html">InkCodec</a></li><li><a href="Serialization.InkObjectDecoder.html">InkObjectDecoder</a></li><li><a href="Serialization.InkObjectEncoder.html">InkObjectEncoder</a></li><li><a href="Serialization.TypedArrayCodec.html">TypedArrayCodec</a></li><li><a href="Stroke.html">Stroke</a></li><li><a href="URIResolver.html">URIResolver</a></li></ul><h3>Interfaces</h3><ul><li><a href="InkInput.InkController.html">InkController</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-bundling.html">Webpack Configuration Manual</a></li><li><a href="tutorial-ink-rendering-pipeline.html">Ink Rendering Pipeline</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 15:38:16 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

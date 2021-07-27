@@ -1,0 +1,3372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: OffscreenLayerGL</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: OffscreenLayerGL</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature">(abstract) </span></span>
+            <span class="ancestors"><a href="Rasterization.html">Rasterization</a><a href="Rasterization.WebGL.html">.WebGL</a>.</span>OffscreenLayerGL<span class="signature">(inkContext, options)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Storage for a bitmap data that can be manipulated or presented on the screen.
+It corresponds to a GL texture or a render buffer.
+It defines the ration between actual pixels and the abstract layer dimensions.
+Not constructable. InkCanvas creates such layers.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="OffscreenLayerGL"><span class="type-signature">(abstract) </span>new OffscreenLayerGL<span class="signature">(inkContext, options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>inkContext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Rasterization.InkContext</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Rasterization.WebGL.html#.InkLayerOptions">Rasterization.WebGL.InkLayerOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bounds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The bounds of the layer. Equals to (0, 0, width, height).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>inkContext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Rasterization.InkContext</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>version 1.3</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Rasterization.WebGL.InkLayer.html">Rasterization.WebGL.InkLayer</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="blend"><span class="type-signature"></span>blend<span class="signature">(source, options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Draws the content of the 'source'. The 'source' must use a texture storage.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>source</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Rasterization.WebGL.OffscreenLayerGL.html">Rasterization.WebGL.OffscreenLayerGL</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>layer to be drawn</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Rasterization.html#.BlendOptions">Rasterization.BlendOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>blending configuration</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="clear"><span class="type-signature"></span>clear<span class="signature">(shape<span class="signature-attributes">opt</span>, color<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Clears layer area with a color</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>shape</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+|
+
+<span class="param-type"><a href="global.html#Polygon">Polygon</a></span>
+|
+
+<span class="param-type"><a href="PathBuilding.InkPath2D.html">PathBuilding.InkPath2D</a></span>
+|
+
+<span class="param-type"><a href="Generic.Color.html">Generic.Color</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    bounds
+                
+                </td>
+            
+
+            <td class="description last"><p>Area to clear</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Color.html">Generic.Color</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    TRANSPERENT
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createImageData"><span class="type-signature"></span>createImageData<span class="signature">(pixels, rect)</span><span class="type-signature"> &rarr; {ImageData}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates image data object</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pixels</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Uint8ClampedArray</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Image data pixel values</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Pixels image data</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ImageData</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Release allocated WebGL resources</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Rasterization.WebGL.InkLayer.html#delete">Rasterization.WebGL.InkLayer#delete</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">(Stroke)</span><span class="type-signature"> &rarr; {<a href="Generic.Rect.html">Generic.Rect</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Draws points with a brush over the layer</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Stroke</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Stroke.html">Stroke</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>model instance</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Affected area</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="drawStroke"><span class="type-signature"></span>drawStroke<span class="signature">(brush, path, drawContext)</span><span class="type-signature"> &rarr; {<a href="Generic.Rect.html">Generic.Rect</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Draws points with a brush over the layer</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>brush</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Rasterization.WebGL.BrushGL.html">Rasterization.WebGL.BrushGL</a></span>
+|
+
+<span class="param-type"><a href="Rasterization.2D.Brush2D.html">Rasterization.2D.Brush2D</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Brush instance determines how the stroke is going to be rendered</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PathBuilding.InterpolatedSpline.html">PathBuilding.InterpolatedSpline</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Spline to draw</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>drawContext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Rasterization.WebGL.StrokeDrawContext.html">Rasterization.WebGL.StrokeDrawContext</a></span>
+|
+
+<span class="param-type"><a href="Generic.Color.html">Generic.Color</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>StrokeDrawContext instance (contains previous path point), applicable only when brush is BrushGL</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>affected area</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="fill"><span class="type-signature"></span>fill<span class="signature">(shape, antiAliasing<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Generic.Rect.html">Generic.Rect</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fills shape with color</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>shape</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PathBuilding.InkPath2D.html">PathBuilding.InkPath2D</a></span>
+|
+
+<span class="param-type"><a href="global.html#Polygon">Polygon</a></span>
+|
+
+<span class="param-type">Rect</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Control points to work with it</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>antiAliasing</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>is anti aliasing is enabled</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>affected area</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getExportCanvas"><span class="type-signature">(abstract) </span>getExportCanvas<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Rasterization.WebGL.InkLayer.html#getExportCanvas">Rasterization.WebGL.InkLayer#getExportCanvas</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getImageData"><span class="type-signature"></span>getImageData<span class="signature">(rect<span class="signature-attributes">opt</span>, postDivideAlpha<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {ImageData}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Read pixels data</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    bounds
+                
+                </td>
+            
+
+            <td class="description last"><p>Area to read</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>postDivideAlpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Recover color from GL premultiplyed color transform, should be true when result targets 2D context</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Pixels image data</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ImageData</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isDeleted"><span class="type-signature"></span>isDeleted<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Rasterization.WebGL.InkLayer.html#isDeleted">Rasterization.WebGL.InkLayer#isDeleted</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Is underlying WebGL resources are deleted</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="putImageData"><span class="type-signature"></span>putImageData<span class="signature">(imageData, x<span class="signature-attributes">opt</span>, y<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Write pixels data</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>imageData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ImageData</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>An ImageData object containing the array of pixel values</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>Horizontal position (x coordinate) at which to place the image data in the destination layer</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>Vertical position (y coordinate) at which to place the image data in the destination layer</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="readPixels"><span class="type-signature"></span>readPixels<span class="signature">(rect<span class="signature-attributes">opt</span>, postDivideAlpha<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Uint8ClampedArray}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Read pixels data</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    bounds
+                
+                </td>
+            
+
+            <td class="description last"><p>area to read</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>postDivideAlpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>result pixels format uses premultiplyed alpha by default, when straight alpha pixels are needed pixels are processed</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>pixels</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Uint8ClampedArray</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="resize"><span class="type-signature"></span>resize<span class="signature">(width, height)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Resize layer</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Rasterization.WebGL.InkLayer.html#resize">Rasterization.WebGL.InkLayer#resize</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setTransform"><span class="type-signature"></span>setTransform<span class="signature">(transform)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Configures ink transformation over underlying layer</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>transform</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Rasterization.WebGL.InkLayer.html#setTransform">Rasterization.WebGL.InkLayer#setTransform</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toBlob"><span class="type-signature">(async) </span>toBlob<span class="signature">(rect<span class="signature-attributes">opt</span>, mimeType<span class="signature-attributes">opt</span>, quality<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Blob}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Exports layer content. Compatible in web environment.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    bounds
+                
+                </td>
+            
+
+            <td class="description last"><p>Area to read</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimeType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    image/png
+                
+                </td>
+            
+
+            <td class="description last"><p>Supported values are image/png, image/jpeg and image/webp.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>quality</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0.92
+                
+                </td>
+            
+
+            <td class="description last"><p>A Number between 0 and 1 indicating image quality if the requested type is image/jpeg or image/webp.
+If this argument is anything else, the default values 0.92 and 0.80 are used for image/jpeg and image/webp respectively.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Rasterization.WebGL.InkLayer.html#toBlob">Rasterization.WebGL.InkLayer#toBlob</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Layer content</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Blob</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toBuffer"><span class="type-signature">(async) </span>toBuffer<span class="signature">(rect<span class="signature-attributes">opt</span>, mimeType<span class="signature-attributes">opt</span>, options)</span><span class="type-signature"> &rarr; {Buffer}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Exports layer content. Compatible in commonjs environment.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    bounds
+                
+                </td>
+            
+
+            <td class="description last"><p>Area to read</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimeType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    image/png
+                
+                </td>
+            
+
+            <td class="description last"><p>Supported values are image/png and image/jpeg.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Rasterization.Layer.html#.PNGOptions">Rasterization.Layer.PNGOptions</a></span>
+|
+
+<span class="param-type"><a href="Rasterization.Layer.html#.JPEGOptions">Rasterization.Layer.JPEGOptions</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Rasterization.WebGL.InkLayer.html#toBuffer">Rasterization.WebGL.InkLayer#toBuffer</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Layer content</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Buffer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="writePixels"><span class="type-signature"></span>writePixels<span class="signature">(data, rect<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Write pixels data</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Uint8ClampedArray</span>
+|
+
+<span class="param-type">Uint8Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Array of pixel values</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Rect.html">Generic.Rect</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    bounds
+                
+                </td>
+            
+
+            <td class="description last"><p>area to write</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-fsx.html">fsx</a></li><li><a href="module-math.html">math</a></li></ul><h3>Namespaces</h3><ul><li><a href="Generic.html">Generic</a></li><li><a href="InkInput.html">InkInput</a></li><li><a href="InkModel.html">InkModel</a></li><li><a href="Manipulation.html">Manipulation</a></li><li><a href="PathBuilding.html">PathBuilding</a></li><li><a href="PathBuilding.Pipeline.html">Pipeline</a></li><li><a href="Rasterization.html">Rasterization</a></li><li><a href="Rasterization.2D.html">2D</a></li><li><a href="Rasterization.WebGL.html">WebGL</a></li><li><a href="Semantics.html">Semantics</a></li><li><a href="Serialization.html">Serialization</a></li></ul><h3>Classes</h3><ul><li><a href="Generic.Color.html">Color</a></li><li><a href="Generic.Identifiable.html">Identifiable</a></li><li><a href="Generic.Matrix.html">Matrix</a></li><li><a href="Generic.Point.html">Point</a></li><li><a href="Generic.Rect.html">Rect</a></li><li><a href="InkInput.Environment.html">Environment</a></li><li><a href="InkInput.InkInputProvider.html">InkInputProvider</a></li><li><a href="InkInput.InputContext.html">InputContext</a></li><li><a href="InkInput.InputDevice.html">InputDevice</a></li><li><a href="InkInput.Scalar.html">Scalar</a></li><li><a href="InkInput.SensorChannel.html">SensorChannel</a></li><li><a href="InkInput.SensorChannelsContext.html">SensorChannelsContext</a></li><li><a href="InkInput.SensorContext.html">SensorContext</a></li><li><a href="InkInput.SensorData.html">SensorData</a></li><li><a href="InkInput.SensorStream.html">SensorStream</a></li><li><a href="InkModel.Element.html">Element</a></li><li><a href="InkModel.Group.html">Group</a></li><li><a href="InkModel.InkNode.html">InkNode</a></li><li><a href="InkModel.Path.html">Path</a></li><li><a href="InkModel.View.html">View</a></li><li><a href="InputListener.html">InputListener</a></li><li><a href="Manipulation.Intersector.html">Intersector</a></li><li><a href="Manipulation.Manipulator.html">Manipulator</a></li><li><a href="Manipulation.Selector.html">Selector</a></li><li><a href="Manipulation.SpatialContext.html">SpatialContext</a></li><li><a href="PathBuilding.ConvexHullProducer.html">ConvexHullProducer</a></li><li><a href="PathBuilding.InkBuilder.html">InkBuilder</a></li><li><a href="PathBuilding.InkBuilderAbstract.html">InkBuilderAbstract</a></li><li><a href="PathBuilding.InkBuilderAsync.html">InkBuilderAsync</a></li><li><a href="PathBuilding.InkPath2D.html">InkPath2D</a></li><li><a href="PathBuilding.InterpolatedSpline.html">InterpolatedSpline</a></li><li><a href="PathBuilding.PathPoint.html">PathPoint</a></li><li><a href="PathBuilding.PathPointContext.html">PathPointContext</a></li><li><a href="PathBuilding.html#.PathSegment">PathSegment</a></li><li><a href="PathBuilding.Pipeline.BrushApplier.html">BrushApplier</a></li><li><a href="PathBuilding.Pipeline.ConvexHullChainProducer.html">ConvexHullChainProducer</a></li><li><a href="PathBuilding.Pipeline.CurvatureBasedInterpolator.html">CurvatureBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.DataProcessor.html">DataProcessor</a></li><li><a href="PathBuilding.Pipeline.DataSequenceProcessor.html">DataSequenceProcessor</a></li><li><a href="PathBuilding.Pipeline.DistanceBasedInterpolator.html">DistanceBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.PathProducer.html">PathProducer</a></li><li><a href="PathBuilding.Pipeline.PolygonMerger.html">PolygonMerger</a></li><li><a href="PathBuilding.Pipeline.PolygonSimplifier.html">PolygonSimplifier</a></li><li><a href="PathBuilding.Pipeline.Smoother.html">Smoother</a></li><li><a href="PathBuilding.Pipeline.SplineInterpolator.html">SplineInterpolator</a></li><li><a href="PathBuilding.Pipeline.SplineProducer.html">SplineProducer</a></li><li><a href="PathBuilding.PointerData.html">PointerData</a></li><li><a href="PathBuilding.Spline.html">Spline</a></li><li><a href="Rasterization.2D.Brush2D.html">Brush2D</a></li><li><a href="Rasterization.2D.BrushPrototype.html">BrushPrototype</a></li><li><a href="Rasterization.2D.InkCanvas2D.html">InkCanvas2D</a></li><li><a href="Rasterization.2D.OffscreenLayer2D.html">OffscreenLayer2D</a></li><li><a href="Rasterization.2D.ShapeFactory.html">ShapeFactory</a></li><li><a href="Rasterization.2D.StrokeRenderer2D.html">StrokeRenderer2D</a></li><li><a href="Rasterization.Layer.html">Layer</a></li><li><a href="Rasterization.WebGL.BrushGL.html">BrushGL</a></li><li><a href="Rasterization.WebGL.GLProgram.html">GLProgram</a></li><li><a href="Rasterization.WebGL.InkCanvasGL.html">InkCanvasGL</a></li><li><a href="Rasterization.WebGL.InkContext.html">InkContext</a></li><li><a href="Rasterization.WebGL.InkGLContext.html">InkGLContext</a></li><li><a href="Rasterization.WebGL.InkLayer.html">InkLayer</a></li><li><a href="Rasterization.WebGL.OffscreenCanvasGL.html">OffscreenCanvasGL</a></li><li><a href="Rasterization.WebGL.OffscreenLayerGL.html">OffscreenLayerGL</a></li><li><a href="Rasterization.WebGL.RectGL.html">RectGL</a></li><li><a href="Rasterization.WebGL.StrokeDrawContext.html">StrokeDrawContext</a></li><li><a href="Rasterization.WebGL.StrokeRendererGL.html">StrokeRendererGL</a></li><li><a href="Semantics.SemanticTriple.html">SemanticTriple</a></li><li><a href="Semantics.TripleStore.html">TripleStore</a></li><li><a href="Serialization.InkCodec.html">InkCodec</a></li><li><a href="Serialization.InkObjectDecoder.html">InkObjectDecoder</a></li><li><a href="Serialization.InkObjectEncoder.html">InkObjectEncoder</a></li><li><a href="Serialization.TypedArrayCodec.html">TypedArrayCodec</a></li><li><a href="Stroke.html">Stroke</a></li><li><a href="URIResolver.html">URIResolver</a></li></ul><h3>Interfaces</h3><ul><li><a href="InkInput.InkController.html">InkController</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-bundling.html">Webpack Configuration Manual</a></li><li><a href="tutorial-ink-rendering-pipeline.html">Ink Rendering Pipeline</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 15:38:16 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

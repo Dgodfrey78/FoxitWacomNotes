@@ -1,0 +1,47 @@
+{
+  "name": "foxit-pdf-sdk-for-web-vuejs-example",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "setup": "npm install",
+    "postsetup": "npm run update-sdk",
+    "update-sdk": "node development/setup.js",
+    "serve": "cross-env NODE_OPTIONS=--max_old_space_size=8192 NODE_ENV=development vue-cli-service serve",
+    "build": "cross-env NODE_OPTIONS=--max_old_space_size=8192 NODE_ENV=production vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.4.3",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@foxitsoftware/addon-loader": "^0.7.3-alpha3",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "html-webpack-externals-plugin": "^3.8.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}

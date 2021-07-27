@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- default(white), black, black-translucent -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Foxit PDF SDK for Web">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=no,transition=no">
+    <meta name="format-detaction" content="telephone=no,email=no">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="750">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="renderer" content="webkit">
+
+    <title>Foxit PDF SDK for Web</title>
+    <link rel="shortcut icon" href="../../assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../../lib/UIExtension.css">
+    <link rel="stylesheet" type="text/css" href="../../../styles/styles.css" title="main" />
+    <link rel="stylesheet" type="text/css" href="../../../styles/navigation.css" />
+
+      	<script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.js"></script>
+
+
+      	<script type="text/javascript" src="../../../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js"></script>
+      	<script type="text/javascript" src="../../../node_modules/jquery-contextmenu/dist/jquery.ui.position.min.js"></script>
+
+      	<!-- wacom-digital-ink dependencies -->
+      	<script type="text/javascript" src="../../../node_modules/clipper-lib/clipper.js"></script>
+      	<script type="text/javascript" src="../../../node_modules/js-md5/build/md5.min.js"></script>
+      	<script type="text/javascript" src="../../../node_modules/poly2tri/dist/poly2tri.min.js"></script>
+      	<script type="text/javascript" src="../../../node_modules/long/dist/long.js"></script>
+      	<script type="text/javascript" src="../../../node_modules/protobufjs/dist/protobuf.min.js"></script>
+      	<script type="text/javascript" src="../../../node_modules/gl-matrix/gl-matrix-min.js"></script>
+      	<script type="text/javascript" src="../../../node_modules/rbush/rbush.min.js"></script>
+
+      	<script type="text/javascript" src="../../../node_modules/js-ext/js-ext-min.js"></script>
+
+      	<!-- wacom-digital-ink engine -->
+      	<script src="../../../node_modules/digital-ink/digital-ink-min.js"></script>
+
+      	<!-- dom-transformer event -->
+
+      	<script type="text/javascript" src="../../../node_modules/dom-transformer/dom-transformer-min.js"></script>
+
+        <script type="text/javascript">
+          const {
+            version,
+            fsx, utils,
+            InputDevice, InputListener,
+            SensorChannel, InkController,
+            Brush2D, BrushPrototype, ShapeFactory,
+            BrushGL, URIResolver,
+            Intersector, Selector,
+            PathPointContext, InkBuilder,
+            InkPath2D, Stroke,
+            InkModel, SpatialContext, InkCodec,
+            Color, Rect, Point, Matrix,
+            PipelineStage, BlendMode,
+            InkCanvas2D, StrokeRenderer2D,
+            InkCanvasGL, StrokeRendererGL
+          } = DigitalInk;
+
+          const {TransformEvent, PinchEvent} = DOMTransformer;
+        </script>
+
+        <script type="text/javascript" src="../../../scripts/DataModel.js"></script>
+        <script type="text/javascript" src="../../../scripts/DataRepository.js"></script>
+        <script type="text/javascript" src="../../../scripts/URIBuilder.js"></script>
+        <script type="text/javascript" src="../../../scripts/BrushPalette.js"></script>
+        <script type="text/javascript" src="../../../scripts/ValueTransformer.js"></script>
+        <script type="text/javascript" src="../../../scripts/Config.js"></script>
+
+        <script type="text/javascript" src="../../../scripts/Lens.js"></script>
+        <script type="text/javascript" src="../../../scripts/InkCanvas.js"></script>
+        <script type="text/javascript" src="../../../scripts/InkCanvasVector.js"></script>
+        <script type="text/javascript" src="../../../scripts/InkCanvasRaster.js"></script>
+
+        <script type="text/javascript" src="../../../scripts/selection/CanvasBubble.js"></script>
+        <script type="text/javascript" src="../../../scripts/selection/CanvasTransformer.js"></script>
+
+
+        <script type="text/javascript" src="../../../scripts/selection/Selection.js"></script>
+        <script type="text/javascript" src="../../../scripts/selection/SelectionVector.js"></script>
+        <script type="text/javascript" src="../../../scripts/selection/SelectionListener.js"></script>
+
+        <script type="text/javascript" src="../../../scripts/layout/DropDown.js"></script>
+        <script type="text/javascript" src="../../../scripts/layout/Layout.js"></script>
+        <script type="text/javascript" src="../../../scripts/app.js"></script>
+
+        <script src="../../../main.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+        }
+
+        #pdf-ui {
+            top: 20px;
+            bottom: 0;
+            position: absolute;
+            width: 50vw;
+        }
+
+        .fv__ui-toolbar .fv__ui-tab-nav {
+            margin-left: 100px;
+        }
+
+        .fv__ui-toolbar .fv__ui-tab-nav li {
+            color: white;
+        }
+
+        .fv__ui-toolbar .fv__ui-tab-nav li.active {
+            color: #636363;
+        }
+
+        .fv__ui-toolbar .fv__ui-gtab-item {
+            color: #fff;
+        }
+        .fv__ui-toolbar .fv__ui-gtab-item.active {
+            color: #636363;
+            background-color: #fff;
+        }
+
+        .fv__ui-mobile #pdf-ui {
+            top: 0;
+        }
+
+        .fv__ui-mobile .fv__ui-nav {
+            display: none;
+        }
+    </style>
+    <script src="../../../lib/adaptive.js"></script>
+</head>
+
+<body>
+
+  <div style="width: 50%; height: auto; overflow: auto; float:left;">
+  <div class="app" style="float:right">
+    <nav>
+      <div>
+        <img src="../../../images/btn_paper_02.jpg" title="Paper" class="Item Paper" onclick="dropDown.toggle('Papers')" alt="" />
+
+        <label for="load_file" title="Import ink object"><img src="../../../images/btn_load.png" title="Load" alt="" /></label>
+        <input id="load_file" type="file" class="Button" onchange="WILL.import(this, 'uim');" />
+
+        <img src="../../../images/btn_save.png" title="Save" onclick="WILL.save()" alt="" />
+
+        <span class="ColorBox Delimiter">
+          <a href="javascript:void(0)" title="Color" class="Item Color" style="background-color: #4A4A4A;">
+            <input type="color" value="#4A4A4A">
+          </a>
+        </span>
+
+        <img src="../../../images/btn_clear.png" class="DelimiterRight" title="Clear" onclick="WILL.clear()" alt="" />
+
+        <span class="VectorPart">
+          <img id="pen" src="../../../images/btn_tools/btn_pen.png" title="Pen" class="Tool" alt="" />
+          <img id="felt" src="../../../images/btn_tools/btn_feather.png" title="Felt" class="Tool" alt="" />
+          <img id="brush" src="../../../images/btn_tools/btn_brush.png" title="Brush" class="Tool" alt="" />
+          <img id="marker" src="../../../images/btn_tools/btn_marker.png" title="Marker" class="Tool" alt="" />
+
+          <img id="basic" name="basic" src="../../../images/btn_tools/btn_basic_brush.png" title="Basic" class="Tool DelimiterLeft" alt="" />
+        </span>
+
+        <span class="RasterPart">
+          <img id="pencil" src="../../../images/btn_tools/btn_pencil.png" title="Pencil" class="Tool" alt="" />
+          <img id="waterBrush" src="../../../images/btn_tools/btn_water_brush.png" title="Water Brush" class="Tool" alt="" />
+          <img id="inkBrush" src="../../../images/btn_tools/btn_feather.png" title="Ink Brush" class="Tool" alt="" />
+          <img id="crayon" src="../../../images/btn_tools/btn_crayon.png" title="Crayon" class="Tool" alt="" />
+        </span>
+
+        <img id="eraser" src="../../../images/btn_tools/eraser.png" class="Tool RasterPart DelimiterLeft" title="Eraser" alt="" />
+
+        <span class="VectorPart PureVector DelimiterLeft">
+          <img id="eraserStroke" src="../../../images/btn_tools/eraser_delayed_partial_stroke.png" class="Tool" title="Delayed Stroke Eraser" alt="" />
+          <img id="eraserWholeStroke" src="../../../images/btn_tools/eraser_whole_stroke.png" class="Tool" title="Whole Stroke Eraser" alt="" />
+        </span>
+
+        <span class="PureVector">
+          <img id="selector" src="../../../images/btn_tools/btn_selector.png" class="Tool VectorPart DelimiterLeft" title="Selector" alt="" />
+          <img id="selectorWholeStroke" src="../../../images/btn_tools/btn_selector_whole_stroke.png" class="Tool VectorPart" title="Whole Stroke Selector" alt="" />
+        </span>
+
+        <img id="customTool" src="../../../images/btn_tools/btn_toolconfig_tool.png" title="Custom Tool" class="DelimiterLeft Tool Disabled" alt="" />
+        <label for="load_tool" title="Import tool"><img src="../../../images/btn_import_brush.png" alt="" /></label>
+        <input id="load_tool" type="file" accept="application/protobuf; proto=WacomInkFormat3.Tool" onchange="WILL.import(this, 'tool')" />
+
+        <div class="BackToMenu">
+          <a href="javascript:void(0)" title="Toggle downsampling" class="Button downsampling" onclick="layout.toggleParam('downsampling')">DS</a>
+          <img src="../../../images/btn_back.png" title="Back to menu" onclick="app.redirect()" style="cursor: pointer" alt="" />
+        </div>
+      </div>
+
+      <div class="DropDown Papers" style="visibility: hidden;">
+        <img src="../../../images/dropdown_arrow.png" class="Arrow" alt="" />
+        <img id="paper_01" src="../../../images/btn_paper_01.jpg" class="Item Paper" alt="" />
+        <img id="paper_02" src="../../../images/btn_paper_02.jpg" class="Item Paper Selected" alt="" />
+        <img id="paper_03" src="../../../images/btn_paper_03.jpg" class="Item Paper" alt="" />
+      </div>
+    </nav>
+
+    <div class="Wrapper">
+      <h3 class="title"></h3>
+      <h5 class="identity">
+        <span id="APPName"></span>
+        <span id="APPVersion"></span>,
+        powered by digital-ink
+        <span id="SDKVersion"></span>
+      </h5>
+
+      <canvas class="layer-transforms" style="display: none" oncontextmenu="event.preventDefault()"></canvas>
+      <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+
+      <div class="selection selection-vector" style="display: none"></div>
+    </div>
+  </div>
+  <div class="FlexWrapper Overlay" style="display: none" onclick="this.style = 'display: none'">
+  <div class="Dialog" onclick="event.stopPropagation()"></div>
+</div>
+</div>
+
+  <div style="width: 50%; height: 500px; overflow: auto; float:left;">
+    <div class="fv__ui-nav">
+        <a class="fv__ui-nav-logo" href="javascript:location.reload()">
+            <i class="fv__icon-logo"></i>
+        </a>
+    </div>
+    <div id="pdf-ui"></div>
+    <script src="../../license-key.js"></script>
+    <script src="../../../lib/preload-jr-worker.js"></script>
+    <script>
+        var readyWorker = preloadJrWorker({
+            workerPath: '../../../lib/',
+            enginePath: '../lib/jr-engine/gsdk',
+            fontPath: '../external/brotli',
+            licenseSN: licenseSN,
+            licenseKey: licenseKey
+        })
+    </script>
+    <script src="../../../lib/UIExtension.full.js"></script>
+    <script>
+        var PDFUI = UIExtension.PDFUI;
+        var Events = UIExtension.PDFViewCtrl.Events;
+        var pdfui = new PDFUI({
+            viewerOptions: {
+                libPath: '../../../lib',
+                jr: {
+                    readyWorker: readyWorker
+                }
+                // customs: {
+                //     getDocPermissions: function () {
+                //         return 0;
+                //     }
+                // }
+            },
+            renderTo: '#pdf-ui',
+            appearance: UIExtension.appearances.adaptive,
+            fragments: [],
+            addons: UIExtension.PDFViewCtrl.DeviceInfo.isMobile ?
+            '../../../lib/uix-addons/allInOne.mobile.js':
+            '../../../lib/uix-addons/allInOne.js'
+        });
+
+        pdfui.addUIEventListener('fullscreenchange', function (isFullscreen) {
+            if (isFullscreen) {
+                document.body.classList.add('fv__pdfui-fullscreen-mode');
+            } else {
+                document.body.classList.remove('fv__pdfui-fullscreen-mode');
+            }
+        });
+
+        function openLoadingLayer() {
+            // return pdfui.getRootComponent()
+            // .then(function(root) {
+            //     return root.getComponentByName('pdf-viewer')
+            // }) .then(function(viewerComponent) {
+            //     return pdfui.loading(viewerComponent.element);
+            // });
+            return pdfui.loading();
+        }
+        var loadingComponentPromise = openLoadingLayer();
+        var openFileError = null
+        var passwordErrorCode = PDFViewCtrl.PDF.constant.Error_Code.password
+        function startLoading() {
+            if(openFileError&&openFileError.error===passwordErrorCode)return
+            if (loadingComponentPromise) {
+                loadingComponentPromise = loadingComponentPromise
+                    .then(function (component) {
+                        component.close();
+                    })
+                    .then(openLoadingLayer);
+            } else {
+                loadingComponentPromise = openLoadingLayer();
+            }
+        }
+        pdfui.addViewerEventListener(Events.beforeOpenFile, startLoading);
+        pdfui.addViewerEventListener(Events.openFileSuccess, function () {
+            openFileError = null
+            loadingComponentPromise.then(function (component) {
+                component.close();
+            });
+        });
+        pdfui.addViewerEventListener(Events.openFileFailed, function (data) {
+            openFileError = data
+            if(openFileError&&openFileError.error===passwordErrorCode)return
+            loadingComponentPromise.then(function (component) {
+                component.close();
+            });
+        });
+
+        pdfui.addViewerEventListener(Events.startConvert, startLoading);
+        pdfui.addViewerEventListener(Events.finishConvert, function () {
+            loadingComponentPromise.then(function (component) {
+                component.close();
+            });
+        });
+
+        pdfui.openPDFByHttpRangeRequest({
+            range: {
+                url: '../../../docs/FoxitPDFSDKforWeb_DemoGuide.pdf',
+            }
+        }, { fileName: 'FoxitPDFSDKforWeb_DemoGuide.pdf' })
+
+        window.addEventListener(UIExtension.PDFViewCtrl.DeviceInfo.isDesktop ? 'resize' : 'orientationchange', function(e) {
+            pdfui.redraw().catch(function(err) {console.log(err)});
+        });
+
+        //signature handlers
+        var requestData = function(type, url, responseType, body){
+            return new Promise(function(res, rej){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open(type, url);
+
+                xmlHttp.responseType = responseType || 'arraybuffer';
+                var formData = new FormData();
+                if (body) {
+                    for (var key in body) {
+                        if (body[key] instanceof Blob) {
+                            formData.append(key, body[key], key);
+                        } else {
+                            formData.append(key, body[key]);
+                        }
+                    }
+                }
+                xmlHttp.onloadend = function(e) {
+                    var status = xmlHttp.status;
+                    if ((status >= 200 && status < 300) || status === 304) {
+                        res(xmlHttp.response);
+                    }else{
+                        rej(new Error('Sign server is not available.'));
+                    }
+                };
+
+                xmlHttp.send(body ? formData : null);
+            });
+        };
+
+        pdfui.setVerifyHandler(function (signatureField, plainBuffer, signedData){
+            return requestData('post', location.origin+'/signature/verify', 'text', {
+                filter: signatureField.getFilter(),
+                subfilter: signatureField.getSubfilter(),
+                signer: signatureField.getSigner(),
+                plainContent: new Blob([plainBuffer]),
+                signedData: new Blob([signedData])
+            });
+        });
+        pdfui.registerSignHandler({
+            filter: 'Adobe.PPKLite',
+            subfilter: 'adbe.pkcs7.sha1',
+            flag: 0x100,
+            distinguishName: 'e=support@foxitsoftware.cn',
+            location: 'FZ',
+            reason: 'Test',
+            signer: 'web sdk',
+            showTime: true,
+            sign: function(setting, buffer) {
+                return requestData('post', location.origin+'/signature/digest_and_sign', 'arraybuffer', {
+                    plain: new Blob([buffer])
+                })
+            }
+        });
+    </script>
+</div>
+</body>
+
+</html>

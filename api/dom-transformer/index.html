@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>dom-transformer</h1>
+<h2>Description</h2>
+<p>The Javascript library performs DOM nodes transformations based on browser DOMMatrix API. Expose transform event and pinch event.</p>
+<h2>Register &amp; Listen transform event</h2>
+<pre class="prettyprint source lang-javascript"><code>let transformer = TransformEvent.register(DOMNode, TransformOptions);
+
+DOMNode.addEventListener(&quot;transformstart&quot;, Function);
+DOMNode.addEventListener(&quot;transform&quot;, Function);
+DOMNode.addEventListener(&quot;transformend&quot;, Function);
+</code></pre>
+<h3>TransformOptions</h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th style="text-align:right">default</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>translate</td>
+<td>boolean</td>
+<td style="text-align:right">false</td>
+<td>Activate translate transform</td>
+</tr>
+<tr>
+<td>rotate</td>
+<td>boolean</td>
+<td style="text-align:right">false</td>
+<td>Activate rotate transform</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>boolean</td>
+<td style="text-align:right">false</td>
+<td>Activate scale transform</td>
+</tr>
+<tr>
+<td>minSize</td>
+<td>DOMSize</td>
+<td style="text-align:right">{width: 50, height: 50}</td>
+<td>Min scale transform limitation</td>
+</tr>
+<tr>
+<td>maxSize</td>
+<td>DOMSize</td>
+<td style="text-align:right"></td>
+<td>Max scale transform limitation</td>
+</tr>
+<tr>
+<td>restrictiveArea</td>
+<td>DOMRect</td>
+<td style="text-align:right"></td>
+<td>Boundary where transformations are restrcited</td>
+</tr>
+<tr>
+<td>keepRatio</td>
+<td>boolean</td>
+<td style="text-align:right">false</td>
+<td>Scale transform allows skew by default</td>
+</tr>
+<tr>
+<td>translateHandle</td>
+<td>HTMLElement</td>
+<td style="text-align:right">registered DOMNode</td>
+<td>Translate controller, defaults to monitored element</td>
+</tr>
+<tr>
+<td>rotateHandles</td>
+<td>Array<HTMLElement></td>
+<td style="text-align:right"></td>
+<td>Rotation controllers</td>
+</tr>
+<tr>
+<td>delta</td>
+<td>boolean</td>
+<td style="text-align:right">false</td>
+<td>Delta transform also exist in event detail, by defaults only accumulated transform is reported</td>
+</tr>
+<tr>
+<td>origin</td>
+<td>boolean</td>
+<td style="text-align:right">false</td>
+<td>Transform is reported in view coordinate system, if oirgin transform is needed set this flag</td>
+</tr>
+</tbody>
+</table>
+<h3>TransformEvent output (event.detail)</h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Describes transformation type. Possible values: translate, scale, rotate, transform, where transform comes from complex operation.</td>
+</tr>
+<tr>
+<td>transform</td>
+<td>DOMMatrix</td>
+<td>Accumulated transform, value depends from 'origin' transform option, when origin is true - it is transform in origin coordinate system else is in view coordinate system.</td>
+</tr>
+<tr>
+<td>delta</td>
+<td>DOMMatrix</td>
+<td>Delta transform. Activated from 'delta' transform option. Value depends from 'origin' transform option, when origin is true - it is delta in origin coordinate system else is in view coordinate system.</td>
+</tr>
+<tr>
+<td>origin</td>
+<td>DOMPoint</td>
+<td>Transformation origin. Available only for transformstart event.</td>
+</tr>
+</tbody>
+</table>
+<h2>Register &amp; Listen pinch event</h2>
+<pre class="prettyprint source lang-javascript"><code>let pincher = PinchEvent.register(DOMNode, PinchOptions);
+
+DOMNode.addEventListener(&quot;pinchstart&quot;, Function);
+DOMNode.addEventListener(&quot;pinch&quot;, Function);
+DOMNode.addEventListener(&quot;pinchend&quot;, Function);
+</code></pre>
+<h3>PinchOptions</h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th style="text-align:right">default</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rotate</td>
+<td>boolean</td>
+<td style="text-align:right">false</td>
+<td>Enable rotatation</td>
+</tr>
+</tbody>
+</table>
+<h3>PinchEvent output (event.detail)</h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>anchor</td>
+<td>DOMPoint</td>
+<td>Point of interest in element coordinate system</td>
+</tr>
+<tr>
+<td>center</td>
+<td>DOMPoint</td>
+<td>Point between 2 fingers in page coordinate system</td>
+</tr>
+<tr>
+<td>origin</td>
+<td>DOMPoint</td>
+<td>Origin of the coordinate system of the attached element (defaults to center of element bounds)</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Scale</td>
+<td>Scale delta</td>
+</tr>
+<tr>
+<td>rotation</td>
+<td>float</td>
+<td>Rotation delta angle in rad</td>
+</tr>
+<tr>
+<td>translation</td>
+<td>Translation</td>
+<td>Translation delta</td>
+</tr>
+<tr>
+<td>transform</td>
+<td>DOMMatrix</td>
+<td>Transform delta. Matrix based on all underlying properties.</td>
+</tr>
+</tbody>
+</table></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-math.html">math</a></li></ul><h3>Classes</h3><ul><li><a href="Pincher.html">Pincher</a></li><li><a href="PinchEvent.html">PinchEvent</a></li><li><a href="Transformer.html">Transformer</a></li><li><a href="TransformEvent.html">TransformEvent</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Jan 20 2021 11:11:56 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

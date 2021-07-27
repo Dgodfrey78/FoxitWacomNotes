@@ -1,0 +1,61 @@
+.selection {position: absolute; cursor: context-menu; z-index: 100;} /* min-width: 90px; min-height: 90px; */
+.selection {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.selection input[type=file] {display: none;}
+.selection input[type=color] {position: absolute; visibility: hidden;}
+
+.selection.selection-path {border: 1px solid #C1C1C1;}
+
+.selection .drag-handle {position: absolute; width: 44px; height: 44px; line-height: 44px; text-align: center; border-radius: 50%; background-color: #A09D9C; opacity: 0.9; cursor: move;}
+.selection .drag-handle:hover, .selection .drag-handle.pressed {opacity: 1;}
+.selection .drag-handle img {vertical-align: middle;}
+
+.selection .rotate-handle {position: absolute; width: 24px; height: 24px; border-radius: 50%; background-color: #A09D9C; opacity: 0.9; cursor: all-scroll;}
+.selection .rotate-handle:hover, .selection .rotate-handle.pressed {opacity: 1;}
+.selection .rotate-handle.top {top: 5px; right: 5px;}
+.selection .rotate-handle.bottom {bottom: 5px; left: 5px;}
+
+.selection .resize-handle {border-radius: 50%; background-color: #868686;}
+
+.selection .resize-handle.top-left {width: 10px; height: 10px; top: -5px; left: -5px;}
+.selection .resize-handle.top-right {width: 10px; height: 10px; top: -5px; right: -5px;}
+.selection .resize-handle.bottom-left {width: 10px; height: 10px; bottom: -5px; left: -5px;}
+.selection .resize-handle.bottom-right {width: 10px; height: 10px; bottom: -5px; right: -5px;}
+
+.selection .resize-handle.top {width: 8px; height: 8px; left: 50%; top: -4px;}
+.selection .resize-handle.bottom {width: 8px; height: 8px; left: 50%; bottom: -4px;}
+.selection .resize-handle.left {width: 8px; height: 8px; left: -4px; top: 50%;}
+.selection .resize-handle.right {width: 8px; height: 8px; right: -4px; top: 50%;}
+
+.selection svg rect, .selection svg path {
+	fill: none;
+	stroke: #868686;
+	stroke-width: 1;
+	stroke-dasharray: 5;
+	-webkit-animation: dash 4s linear infinite;
+	animation: dash 4s linear infinite;
+}
+
+@-webkit-keyframes dash {
+	from {
+		stroke-dashoffset: 100;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes dash {
+	from {
+		stroke-dashoffset: 100;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}

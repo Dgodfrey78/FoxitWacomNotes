@@ -1,0 +1,35 @@
+nav {background-color: #363636; height: var(--nav-height); text-align: center; position: relative; user-select: none;}
+nav > div:first-child {display: inline-block; height: 44px; padding: 8px 0;}
+nav span {display: inline-block;}
+nav img {cursor: pointer;}
+nav .Paper {border-radius: 4px;}
+nav .ColorBox {display: inline-block; width: 44px; height: 44px;}
+nav .ColorBox .Color {display: inline-block; margin: 12px 0; border-radius: 50%;}
+nav .ColorBox {position: relative;}
+nav .ColorBox input[type="color"] {display: block; position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;}
+
+nav .Disabled {pointer-events: none;}
+nav img.Disabled {filter: opacity(0.4);}
+
+nav .Delimiter {margin-left: 30px; margin-right: 30px;}
+nav .DelimiterLeft {margin-left: 30px;}
+nav .DelimiterRight {margin-right: 30px;}
+
+.DropDown {position: absolute; top: 69px; padding: 3px 5px; border-radius: 4px; background-color: #FFFFFF; box-shadow: 1px 1px 4px #E7E7E7; z-index: 1;}
+.DropDown img {cursor: pointer;}
+.DropDown .Arrow {position: absolute; top: -8px;}
+nav .Item, .DropDown .Item {width: 20px; height: 20px; margin: 12px;}
+nav .Item:hover, .DropDown .Item:hover, .DropDown .Item.Selected {width: 34px; height: 34px; margin: 5px;}
+
+nav .Button.Selected, nav img:not(.Paper):hover {filter: brightness(100);}
+nav .ToolConfig {position: absolute; top: 0; right: 10px; padding: 8px 0;}
+
+.DropDown.Papers .Arrow {left: 69px;}
+.DropDown.Papers .Paper {border-radius: 4px;}
+
+.DropDown.Colors .Arrow {left: 115px;}
+.DropDown.Colors .Color {display: inline-block; border-radius: 50%;}
+
+.BackToMenu {position: absolute; top: 0; right: 10px; padding: 8px 0; line-height: 45px}
+nav a.Button {font-size: 16px; vertical-align: top; color: #797979;}
+nav a.Button:hover, nav a.Button.Selected {color: white;}

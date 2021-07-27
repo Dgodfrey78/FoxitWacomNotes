@@ -1,0 +1,75 @@
+*******************************************************************************************
+Foxit PDF SDK for Web 8.0.0  -- Migration Notices
+
+***** PDFViewCtrl *****
+
+The Returns of PDF.PDFForm.addControl()was changed to object instead of boolean.
+
+    ```7.6
+	Returns
+	
+        {Promise.<bool>} true means success, while false means failure.
+    
+    ```
+
+    ```8.0
+	Returns
+    {
+        success:boolean, - true means success, while false means failure.
+        newFieldName:string - if the specified field name can not be used for a new field in specified field type, It will use a new field name for the specified field type.
+    }
+    ```
+
+*******************************************************************************************
+Foxit PDF SDK for Web 7.6.0  -- Migration Notices
+
+***** PDFViewCtrl *****
+
+1. The constant STATE_HANDLER_SELECT_TEXT_ANNOTATION was deprecated. If you have the version 7.6.0 or later, you should change the handler to STATE_HANDLER_SELECT_TEXT_IMAGE or STATE_HANDLER_SELECT_ANNOTATION. 
+
+Related API: 
+	PDFViewCtrl.contants.STATE_HANDLER_NAMES  
+ 
+***** PDFUI *****
+
+2. Two new parameters url and showUrl were added to PDFViewCtrl::stateHandler::StampStateHandlerParams for creating a user stamp. If the url and showUrl are not declared, the stamp would appear as a blank rectangle on page. 
+
+Related API:
+	PDFViewCtrl.constants.STATE_HANDLER_NAMES.STATE_HANDLER_CREATE_STAMP 
+	PDFViewCtrl::stateHandler::StampStateHandlerParams
+
+*******************************************************************************************
+
+Foxit PDF SDK for Web 7.5.0  -- Migration Notices
+
+Foxit PDF SDK for Web 7.5.0 is completely backwards compatible with its previous version.
+
+********************************************************************************************
+Foxit PDF SDK for Web 7.4.0  -- Migration Notices
+
+***** PDFUI*****
+
+1. If your UI uses the UIExtension build-in template, and has a custom <tab>, you should read this change before upgrading. The method for adding custom <tab> was adjusted as follows:
+
+	[{
+		target: 'toolbar-tabs',
+		action: FRAGMENT_ACTION.APPEND,
+		template: '<gtab name="new-tab" group="toolbar-tab" body="new-tab-body">Tab inserted via fragment-configuration</gtab>'
+	}, {
+		target: 'toolbar-tab-bodies',
+		action: FRAGMENT_ACTION.APPEND,
+		template: '<div name="new-tab-body" style="line-height:1"><text>New tab body</text></div>'
+	}];
+	For details, you may check https://webviewer-demo.foxitsoftware.com/docs/developer-guide/ui-extension/components/tab.html#examples
+			
+2. The `<tab>` component was replaced with `<gtab>`. If your UI uses the UIExtension build-in template, the following css should be added: 
+
+   ```css
+   .fv__ui-toolbar .fv__ui-gtab-item {
+        color: #fff;
+    }
+    .fv__ui-toolbar .fv__ui-gtab-item.active {
+        color: #636363;y
+        background-color: #fff;
+    }
+   ```

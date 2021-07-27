@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Foxit PDF SDK for Web</title>
+    <link rel="shortcut icon" href="../../assets/favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="../../../lib/UIExtension.css">
+    <style>
+        body {
+            height: 100vh;
+        }
+        #pdf-ui {
+            top: 20px;
+            bottom: 0;
+            position: absolute;
+            width: 100vw;
+        }
+
+        .fv__ui-toolbar .fv__ui-tab-nav {
+            margin-left: 266px;
+        }
+        .fv__ui-toolbar .fv__ui-tab-nav li {
+            color: white;
+        }
+        .fv__ui-toolbar .fv__ui-tab-nav li.active {
+            color: #636363;
+        }
+        
+        .fv__ui-toolbar .fv__ui-gtab-item {
+            color: #fff;
+        }
+
+        .fv__ui-toolbar .fv__ui-gtab-item.active {
+            color: #636363;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+<div class="fv__ui-nav">
+    <a class="fv__ui-nav-logo" href="javascript:location.reload()">
+        <i class="fv__icon-logo"></i>
+    </a>
+</div>
+<div id="pdf-ui"></div>
+</body>
+<script src="../../license-key.js"></script>
+<script src="../../../lib/UIExtension.full.js"></script>
+<script>
+    var PDFUI = UIExtension.PDFUI;
+    var pdfui = new PDFUI({
+        viewerOptions: {
+            libPath: '../../../lib',
+            jr: {
+                licenseSN: licenseSN,
+                licenseKey: licenseKey
+            }
+        },
+        renderTo: '#pdf-ui',
+        fragments: [],
+        addons: [
+            '../../../lib/uix-addons/file-property/',
+            '../../../lib/uix-addons/multi-media/',
+            '../../../lib/uix-addons/password-protect/',
+            '../../../lib/uix-addons/redaction/',
+            '../../../lib/uix-addons/path-objects/',
+            '../../../lib/uix-addons/print/',
+        ]
+    });
+    
+    pdfui.openPDFByHttpRangeRequest({
+        range:{
+            url:'../../../docs/FoxitPDFSDKforWeb_DemoGuide.pdf',
+        }
+    },{fileName:'FoxitPDFSDKforWeb_DemoGuide.pdf'})
+
+    window.addEventListener(UIExtension.PDFViewCtrl.DeviceInfo.isDesktop ? 'resize' : 'orientationchange', function(e) {
+        pdfui.redraw().catch(function(err) {console.log(err)});
+    });
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./service-worker.js');
+    }
+</script>
+
+</html>

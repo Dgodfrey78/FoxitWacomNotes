@@ -1,0 +1,4720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Matrix</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: Matrix</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="Generic.html">Generic</a>.</span>Matrix<span class="signature">(value<span class="signature-attributes">opt</span>, multiplicationType<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Represents 4x4 matrix, sutiable for 2D operations, based on gl-matrix - <a href="http://glmatrix.net/docs/module-mat4.html">mat4</a></p>
+<p>a, b, c, d, tx, ty -
+Double-precision floating-point values representing the components of a 4x4 matrix which are required in order to perform 2D rotations and translations.
+These are aliases for specific components of a 4x4 matrix, as shown below.</p>
+<table>
+<thead>
+<tr>
+<th><em>2D</em></th>
+<th><em>3D</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>m11</td>
+</tr>
+<tr>
+<td>b</td>
+<td>m12</td>
+</tr>
+<tr>
+<td>c</td>
+<td>m21</td>
+</tr>
+<tr>
+<td>d</td>
+<td>m22</td>
+</tr>
+<tr>
+<td>tx</td>
+<td>m41</td>
+</tr>
+<tr>
+<td>ty</td>
+<td>m42</td>
+</tr>
+</tbody>
+</table>
+<p>m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44 -
+Double-precision floating-point values representing each component of a 4x4 matrix, where m11 through m14 are the first column, m21 through m24 are the second column, and so forth</p>
+<xmp>
+ | m11 m21 m31 m41 |
+ | m12 m22 m32 m42 |
+ | m13 m23 m33 m43 |
+ | m14 m24 m34 m44 |
+</xmp></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="Matrix"><span class="type-signature"></span>new Matrix<span class="signature">(value<span class="signature-attributes">opt</span>, multiplicationType<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates a matrix</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Float32Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    IDENTITY
+                
+                </td>
+            
+
+            <td class="description last"><p>Matrix data</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>multiplicationType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html#.MultiplicationType">Generic.Matrix.MultiplicationType</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    MultiplicationType.PRE
+                
+                </td>
+            
+
+            <td class="description last"><p>Multiplication type</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>isIdentity</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A Boolean whose value is true if the matrix is the identity matrix.
+The identity matrix is one in which every value is 0 except those on the main diagonal from top-left to bottom-right corner (in other words, where the offsets in each direction are equal).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>translateX</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>X axis translation</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>translateY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Y axis translation</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>skewX</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>X axis skew angle in rad</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>skewY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Y axis skew angle in rad</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scaleX</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>X axis scale factor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scaleY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Y axis scale factor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rotation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Z axis rotation angle in rad</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://glmatrix.net/docs/module-mat4.html">mat4</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fromMatrix"><span class="type-signature">(static) </span>fromMatrix<span class="signature">(data, multiplicationType)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Factory method for Matrix creation</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Float32Array</span>
+|
+
+<span class="param-type">Matrix2D</span>
+|
+
+<span class="param-type">Matrix3D</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>multiplicationType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Generic.MultiplicationType</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Matrix based on data</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fromPoints"><span class="type-signature">(static) </span>fromPoints<span class="signature">(ps, pf)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates transformation based on three points</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Generic.Point.html">Generic.Point</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Fixed array with length 3. Starting points which should be transformed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pf</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Generic.Point.html">Generic.Point</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Fixed array with length 3. Final points after transformation</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Matrix which transforms starting points to final points</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fromRotate"><span class="type-signature">(static) </span>fromRotate<span class="signature">(alpha, origin<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates delta rotate matrix</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>alpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Value should be in rad</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Point.html">Generic.Point</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {x: 0, y: 0}
+                
+                </td>
+            
+
+            <td class="description last"><p>Transform origin</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fromScale"><span class="type-signature">(static) </span>fromScale<span class="signature">(factor, origin<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates delta scale matrix</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>factor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Scale">Scale</a></span>
+|
+
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Scale factor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Point.html">Generic.Point</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {x: 0, y: 0}
+                
+                </td>
+            
+
+            <td class="description last"><p>Transform origin</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fromString"><span class="type-signature">(static) </span>fromString<span class="signature">(value, multiplicationType)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>CSS transform value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>multiplicationType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Generic.MultiplicationType</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Matrix based on this string</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fromTranslate"><span class="type-signature">(static) </span>fromTranslate<span class="signature">(offset)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates delta translate matrix</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>offset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Translate">Translate</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".multiply"><span class="type-signature">(static) </span>multiply<span class="signature">(a, b)</span><span class="type-signature"> &rarr; {Matrix}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Multiplies matrices AxB</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Matrix</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Matrix A</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Matrix</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Matrix B</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Matrix</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="decompose"><span class="type-signature"></span>decompose<span class="signature">()</span><span class="type-signature"> &rarr; {MatrixData}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Decompose matrix to translate, rotate, skew and scale</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Decomposed matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MatrixData</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="invert"><span class="type-signature"></span>invert<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Inverts matrix. The original matrix is not altered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="invertSelf"><span class="type-signature"></span>invertSelf<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Inverts matrix</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="multiply"><span class="type-signature"></span>multiply<span class="signature">(delta)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Multiplies with matrix by post or pre multiplying (specified by multiplication type).
+The original matrix is not altered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>delta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="multiplySelf"><span class="type-signature"></span>multiplySelf<span class="signature">(delta)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Modifies the matrix by post or pre multiplying (specified by multiplication type) it with the specified Matrix</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>delta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="postMultiply"><span class="type-signature"></span>postMultiply<span class="signature">(delta)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Post multiplication (moving coordinate system (Euler frame), fixed point)
+The original matrix is not altered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>delta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="postMultiplySelf"><span class="type-signature"></span>postMultiplySelf<span class="signature">(delta)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Post multiplication (moving coordinate system (Euler frame), fixed point)</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>delta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="preMultiply"><span class="type-signature"></span>preMultiply<span class="signature">(delta)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Pre multiplication (fixed coordinate system (fixed frame), moving point)
+The original matrix is not altered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>delta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="preMultiplySelf"><span class="type-signature"></span>preMultiplySelf<span class="signature">(delta)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Pre multiplication (fixed coordinate system (fixed frame), moving point)</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>delta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="rotate"><span class="type-signature"></span>rotate<span class="signature">(alpha, origin<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Applys 2D rotation. The original matrix is not altered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>alpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Value should be in rad</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Point.html">Generic.Point</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {x: 0, y: 0}
+                
+                </td>
+            
+
+            <td class="description last"><p>Transform origin</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="rotateSelf"><span class="type-signature"></span>rotateSelf<span class="signature">(alpha, origin<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Applys 2D rotation</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>alpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Value should be in rad</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Point.html">Generic.Point</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {x: 0, y: 0}
+                
+                </td>
+            
+
+            <td class="description last"><p>Transform origin</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="scale"><span class="type-signature"></span>scale<span class="signature">(factor, origin<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Applys 2D scale. The original matrix is not altered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>factor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Scale">Scale</a></span>
+|
+
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Scale factor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Point.html">Generic.Point</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {x: 0, y: 0}
+                
+                </td>
+            
+
+            <td class="description last"><p>Transform origin</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="scaleSelf"><span class="type-signature"></span>scaleSelf<span class="signature">(factor, origin<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Applys 2D scale</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>factor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Scale">Scale</a></span>
+|
+
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Scale factor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Point.html">Generic.Point</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {x: 0, y: 0}
+                
+                </td>
+            
+
+            <td class="description last"><p>Transform origin</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toFloat32Array"><span class="type-signature"></span>toFloat32Array<span class="signature">()</span><span class="type-signature"> &rarr; {Float32Array}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Matrix data as array</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Float32Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON<span class="signature">()</span><span class="type-signature"> &rarr; {JSON}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Matrix data</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSON</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">(whole)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Stringify matrix</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>whole</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Generate matrix string as 4x4</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>CSS transform value when whole is false</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="transformPoint"><span class="type-signature"></span>transformPoint<span class="signature">(matrix)</span><span class="type-signature"> &rarr; {<a href="Generic.Point.html">Generic.Point</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Transform point</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>matrix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Transform matrix</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transformed point</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Point.html">Generic.Point</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(offset)</span><span class="type-signature"> &rarr; {<a href="Generic.Matrix.html">Generic.Matrix</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Applys 2D translation. The original matrix is not altered.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>offset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Translate">Translate</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Transform as new Matrix</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Generic.Matrix.html">Generic.Matrix</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="translateSelf"><span class="type-signature"></span>translateSelf<span class="signature">(offset)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Applys 2D translation</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>offset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Translate">Translate</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id=".MultiplicationType">MultiplicationType</h4>
+
+
+
+
+<div class="description">
+    <p>Describes multiply operation matrices order. Affects multiply and multiplySelf methods.</p>
+</div>
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>PRE</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Fixed coordinate system (fixed frame), moving point</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>POST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Moving coordinate system (Euler frame), fixed point</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-fsx.html">fsx</a></li><li><a href="module-math.html">math</a></li></ul><h3>Namespaces</h3><ul><li><a href="Generic.html">Generic</a></li><li><a href="InkInput.html">InkInput</a></li><li><a href="InkModel.html">InkModel</a></li><li><a href="Manipulation.html">Manipulation</a></li><li><a href="PathBuilding.html">PathBuilding</a></li><li><a href="PathBuilding.Pipeline.html">Pipeline</a></li><li><a href="Rasterization.html">Rasterization</a></li><li><a href="Rasterization.2D.html">2D</a></li><li><a href="Rasterization.WebGL.html">WebGL</a></li><li><a href="Semantics.html">Semantics</a></li><li><a href="Serialization.html">Serialization</a></li></ul><h3>Classes</h3><ul><li><a href="Generic.Color.html">Color</a></li><li><a href="Generic.Identifiable.html">Identifiable</a></li><li><a href="Generic.Matrix.html">Matrix</a></li><li><a href="Generic.Point.html">Point</a></li><li><a href="Generic.Rect.html">Rect</a></li><li><a href="InkInput.Environment.html">Environment</a></li><li><a href="InkInput.InkInputProvider.html">InkInputProvider</a></li><li><a href="InkInput.InputContext.html">InputContext</a></li><li><a href="InkInput.InputDevice.html">InputDevice</a></li><li><a href="InkInput.Scalar.html">Scalar</a></li><li><a href="InkInput.SensorChannel.html">SensorChannel</a></li><li><a href="InkInput.SensorChannelsContext.html">SensorChannelsContext</a></li><li><a href="InkInput.SensorContext.html">SensorContext</a></li><li><a href="InkInput.SensorData.html">SensorData</a></li><li><a href="InkInput.SensorStream.html">SensorStream</a></li><li><a href="InkModel.Element.html">Element</a></li><li><a href="InkModel.Group.html">Group</a></li><li><a href="InkModel.InkNode.html">InkNode</a></li><li><a href="InkModel.Path.html">Path</a></li><li><a href="InkModel.View.html">View</a></li><li><a href="InputListener.html">InputListener</a></li><li><a href="Manipulation.Intersector.html">Intersector</a></li><li><a href="Manipulation.Manipulator.html">Manipulator</a></li><li><a href="Manipulation.Selector.html">Selector</a></li><li><a href="Manipulation.SpatialContext.html">SpatialContext</a></li><li><a href="PathBuilding.ConvexHullProducer.html">ConvexHullProducer</a></li><li><a href="PathBuilding.InkBuilder.html">InkBuilder</a></li><li><a href="PathBuilding.InkBuilderAbstract.html">InkBuilderAbstract</a></li><li><a href="PathBuilding.InkBuilderAsync.html">InkBuilderAsync</a></li><li><a href="PathBuilding.InkPath2D.html">InkPath2D</a></li><li><a href="PathBuilding.InterpolatedSpline.html">InterpolatedSpline</a></li><li><a href="PathBuilding.PathPoint.html">PathPoint</a></li><li><a href="PathBuilding.PathPointContext.html">PathPointContext</a></li><li><a href="PathBuilding.html#.PathSegment">PathSegment</a></li><li><a href="PathBuilding.Pipeline.BrushApplier.html">BrushApplier</a></li><li><a href="PathBuilding.Pipeline.ConvexHullChainProducer.html">ConvexHullChainProducer</a></li><li><a href="PathBuilding.Pipeline.CurvatureBasedInterpolator.html">CurvatureBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.DataProcessor.html">DataProcessor</a></li><li><a href="PathBuilding.Pipeline.DataSequenceProcessor.html">DataSequenceProcessor</a></li><li><a href="PathBuilding.Pipeline.DistanceBasedInterpolator.html">DistanceBasedInterpolator</a></li><li><a href="PathBuilding.Pipeline.PathProducer.html">PathProducer</a></li><li><a href="PathBuilding.Pipeline.PolygonMerger.html">PolygonMerger</a></li><li><a href="PathBuilding.Pipeline.PolygonSimplifier.html">PolygonSimplifier</a></li><li><a href="PathBuilding.Pipeline.Smoother.html">Smoother</a></li><li><a href="PathBuilding.Pipeline.SplineInterpolator.html">SplineInterpolator</a></li><li><a href="PathBuilding.Pipeline.SplineProducer.html">SplineProducer</a></li><li><a href="PathBuilding.PointerData.html">PointerData</a></li><li><a href="PathBuilding.Spline.html">Spline</a></li><li><a href="Rasterization.2D.Brush2D.html">Brush2D</a></li><li><a href="Rasterization.2D.BrushPrototype.html">BrushPrototype</a></li><li><a href="Rasterization.2D.InkCanvas2D.html">InkCanvas2D</a></li><li><a href="Rasterization.2D.OffscreenLayer2D.html">OffscreenLayer2D</a></li><li><a href="Rasterization.2D.ShapeFactory.html">ShapeFactory</a></li><li><a href="Rasterization.2D.StrokeRenderer2D.html">StrokeRenderer2D</a></li><li><a href="Rasterization.Layer.html">Layer</a></li><li><a href="Rasterization.WebGL.BrushGL.html">BrushGL</a></li><li><a href="Rasterization.WebGL.GLProgram.html">GLProgram</a></li><li><a href="Rasterization.WebGL.InkCanvasGL.html">InkCanvasGL</a></li><li><a href="Rasterization.WebGL.InkContext.html">InkContext</a></li><li><a href="Rasterization.WebGL.InkGLContext.html">InkGLContext</a></li><li><a href="Rasterization.WebGL.InkLayer.html">InkLayer</a></li><li><a href="Rasterization.WebGL.OffscreenCanvasGL.html">OffscreenCanvasGL</a></li><li><a href="Rasterization.WebGL.OffscreenLayerGL.html">OffscreenLayerGL</a></li><li><a href="Rasterization.WebGL.RectGL.html">RectGL</a></li><li><a href="Rasterization.WebGL.StrokeDrawContext.html">StrokeDrawContext</a></li><li><a href="Rasterization.WebGL.StrokeRendererGL.html">StrokeRendererGL</a></li><li><a href="Semantics.SemanticTriple.html">SemanticTriple</a></li><li><a href="Semantics.TripleStore.html">TripleStore</a></li><li><a href="Serialization.InkCodec.html">InkCodec</a></li><li><a href="Serialization.InkObjectDecoder.html">InkObjectDecoder</a></li><li><a href="Serialization.InkObjectEncoder.html">InkObjectEncoder</a></li><li><a href="Serialization.TypedArrayCodec.html">TypedArrayCodec</a></li><li><a href="Stroke.html">Stroke</a></li><li><a href="URIResolver.html">URIResolver</a></li></ul><h3>Interfaces</h3><ul><li><a href="InkInput.InkController.html">InkController</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-bundling.html">Webpack Configuration Manual</a></li><li><a href="tutorial-ink-rendering-pipeline.html">Ink Rendering Pipeline</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 15:38:16 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

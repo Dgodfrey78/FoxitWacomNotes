@@ -1,0 +1,25 @@
+{
+  "name": "convernient-dependency",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "gulp setup & npm i -S ../../../../lib",
+    "start": "webpack-dev-server --config ./webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.0",
+    "css-loader": "^3.4.2",
+    "gulp": "^4.0.2",
+    "gulp-json-editor": "^2.5.4",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}

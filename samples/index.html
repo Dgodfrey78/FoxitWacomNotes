@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>WILL 3 - Rendering, Manipulations and Serialization (Universal Ink Model) Demo</title>
+
+	<link rel="stylesheet" type="text/css" href="/styles/styles.css" title="main" />
+	<link rel="stylesheet" type="text/css" href="/styles/navigation.css" />
+
+	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+
+	<link rel="stylesheet" href="/node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css">
+	<script type="text/javascript" src="/node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js"></script>
+	<script type="text/javascript" src="/node_modules/jquery-contextmenu/dist/jquery.ui.position.min.js"></script>
+
+	<!-- wacom-digital-ink dependencies -->
+	<script type="text/javascript" src="/node_modules/clipper-lib/clipper.js"></script>
+	<script type="text/javascript" src="/node_modules/js-md5/build/md5.min.js"></script>
+	<script type="text/javascript" src="/node_modules/poly2tri/dist/poly2tri.min.js"></script>
+	<script type="text/javascript" src="/node_modules/long/dist/long.js"></script>
+	<script type="text/javascript" src="/node_modules/protobufjs/dist/protobuf.min.js"></script>
+	<script type="text/javascript" src="/node_modules/gl-matrix/gl-matrix-min.js"></script>
+	<script type="text/javascript" src="/node_modules/rbush/rbush.min.js"></script>
+
+	<script type="text/javascript" src="/node_modules/js-ext/js-ext-min.js"></script>
+
+	<!-- wacom-digital-ink engine -->
+	<script src="/node_modules/digital-ink/digital-ink-min.js"></script>
+
+	<!-- dom-transformer event -->
+	<link rel="stylesheet" type="text/css" href="/node_modules/dom-transformer/dom-transformer.css" />
+	<script type="text/javascript" src="/node_modules/dom-transformer/dom-transformer-min.js"></script>
+
+	<script type="text/javascript">
+		const {
+			version,
+			fsx, utils,
+			InputDevice, InputListener,
+			SensorChannel, InkController,
+			Brush2D, BrushPrototype, ShapeFactory,
+			BrushGL, URIResolver,
+			Intersector, Selector,
+			PathPointContext, InkBuilder,
+			InkPath2D, Stroke,
+			InkModel, SpatialContext, InkCodec,
+			Color, Rect, Point, Matrix,
+			PipelineStage, BlendMode,
+			InkCanvas2D, StrokeRenderer2D,
+			InkCanvasGL, StrokeRendererGL
+		} = DigitalInk;
+
+		const {TransformEvent, PinchEvent} = DOMTransformer;
+	</script>
+
+	<script type="text/javascript" src="./scripts/DataModel.js"></script>
+	<script type="text/javascript" src="./scripts/DataRepository.js"></script>
+	<script type="text/javascript" src="./scripts/URIBuilder.js"></script>
+	<script type="text/javascript" src="./scripts/BrushPalette.js"></script>
+	<script type="text/javascript" src="./scripts/ValueTransformer.js"></script>
+	<script type="text/javascript" src="./scripts/Config.js"></script>
+
+	<script type="text/javascript" src="./scripts/Lens.js"></script>
+	<script type="text/javascript" src="./scripts/InkCanvas.js"></script>
+	<script type="text/javascript" src="./scripts/InkCanvasVector.js"></script>
+	<script type="text/javascript" src="./scripts/InkCanvasRaster.js"></script>
+
+	<script type="text/javascript" src="./scripts/selection/CanvasBubble.js"></script>
+	<script type="text/javascript" src="./scripts/selection/CanvasTransformer.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/styles/selection.css" />
+
+	<script type="text/javascript" src="./scripts/selection/Selection.js"></script>
+	<script type="text/javascript" src="./scripts/selection/SelectionVector.js"></script>
+	<script type="text/javascript" src="./scripts/selection/SelectionListener.js"></script>
+
+	<script type="text/javascript" src="/scripts/layout/DropDown.js"></script>
+	<script type="text/javascript" src="/scripts/layout/Layout.js"></script>
+	<script type="text/javascript" src="/scripts/app.js"></script>
+
+	<script src="./main.js"></script>
+</head>
+<body>
+	<div class="FlexWrapper menu" style="display: none">
+		<div>
+			<h2>Samples:</h2>
+
+			<ol>
+				<li>Inking</li>
+				<ol>
+					<li><a href="javascript: void(0)" id="sample1" onclick="app.redirect(1)">Vector Ink Demo</a></li>
+					<li><a href="javascript: void(0)" id="sample2" onclick="app.redirect(2)">Raster Ink Demo</a></li>
+				</ol>
+				<li>Mixed Canvas</li>
+				<ol>
+					<li><a href="javascript: void(0)" id="sample3" onclick="app.redirect(3)">Mixed Ink Demo (WebGL canvas + Vector brush)</a></li>
+				</ol>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="app" style="display: none">
+		<nav>
+			<div>
+				<img src="/images/btn_paper_02.jpg" title="Paper" class="Item Paper" onclick="dropDown.toggle('Papers')" alt="" />
+
+				<label for="load_file" title="Import ink object"><img src="/images/btn_load.png" title="Load" alt="" /></label>
+				<input id="load_file" type="file" class="Button" onchange="WILL.import(this, 'uim');" />
+
+				<img src="/images/btn_save.png" title="Save" onclick="WILL.save()" alt="" />
+
+				<span class="ColorBox Delimiter">
+					<a href="javascript:void(0)" title="Color" class="Item Color" style="background-color: #4A4A4A;">
+						<input type="color" value="#4A4A4A">
+					</a>
+				</span>
+
+				<img src="/images/btn_clear.png" class="DelimiterRight" title="Clear" onclick="WILL.clear()" alt="" />
+
+				<span class="VectorPart">
+					<img id="pen" src="/images/btn_tools/btn_pen.png" title="Pen" class="Tool" alt="" />
+					<img id="felt" src="/images/btn_tools/btn_feather.png" title="Felt" class="Tool" alt="" />
+					<img id="brush" src="/images/btn_tools/btn_brush.png" title="Brush" class="Tool" alt="" />
+					<img id="marker" src="/images/btn_tools/btn_marker.png" title="Marker" class="Tool" alt="" />
+
+					<img id="basic" name="basic" src="/images/btn_tools/btn_basic_brush.png" title="Basic" class="Tool DelimiterLeft" alt="" />
+				</span>
+
+				<span class="RasterPart">
+					<img id="pencil" src="/images/btn_tools/btn_pencil.png" title="Pencil" class="Tool" alt="" />
+					<img id="waterBrush" src="/images/btn_tools/btn_water_brush.png" title="Water Brush" class="Tool" alt="" />
+					<img id="inkBrush" src="/images/btn_tools/btn_feather.png" title="Ink Brush" class="Tool" alt="" />
+					<img id="crayon" src="/images/btn_tools/btn_crayon.png" title="Crayon" class="Tool" alt="" />
+				</span>
+
+				<img id="eraser" src="/images/btn_tools/eraser.png" class="Tool RasterPart DelimiterLeft" title="Eraser" alt="" />
+
+				<span class="VectorPart PureVector DelimiterLeft">
+					<img id="eraserStroke" src="/images/btn_tools/eraser_delayed_partial_stroke.png" class="Tool" title="Delayed Stroke Eraser" alt="" />
+					<img id="eraserWholeStroke" src="/images/btn_tools/eraser_whole_stroke.png" class="Tool" title="Whole Stroke Eraser" alt="" />
+				</span>
+
+				<span class="PureVector">
+					<img id="selector" src="/images/btn_tools/btn_selector.png" class="Tool VectorPart DelimiterLeft" title="Selector" alt="" />
+					<img id="selectorWholeStroke" src="/images/btn_tools/btn_selector_whole_stroke.png" class="Tool VectorPart" title="Whole Stroke Selector" alt="" />
+				</span>
+
+				<img id="customTool" src="/images/btn_tools/btn_toolconfig_tool.png" title="Custom Tool" class="DelimiterLeft Tool Disabled" alt="" />
+				<label for="load_tool" title="Import tool"><img src="/images/btn_import_brush.png" alt="" /></label>
+				<input id="load_tool" type="file" accept="application/protobuf; proto=WacomInkFormat3.Tool" onchange="WILL.import(this, 'tool')" />
+
+				<div class="BackToMenu">
+					<a href="javascript:void(0)" title="Toggle downsampling" class="Button downsampling" onclick="layout.toggleParam('downsampling')">DS</a>
+					<img src="/images/btn_back.png" title="Back to menu" onclick="app.redirect()" style="cursor: pointer" alt="" />
+				</div>
+			</div>
+
+			<div class="DropDown Papers" style="visibility: hidden;">
+				<img src="/images/dropdown_arrow.png" class="Arrow" alt="" />
+				<img id="paper_01" src="/images/btn_paper_01.jpg" class="Item Paper" alt="" />
+				<img id="paper_02" src="/images/btn_paper_02.jpg" class="Item Paper Selected" alt="" />
+				<img id="paper_03" src="/images/btn_paper_03.jpg" class="Item Paper" alt="" />
+			</div>
+		</nav>
+
+		<div class="Wrapper">
+			<h3 class="title"></h3>
+			<h5 class="identity">
+				<span id="APPName"></span>
+				<span id="APPVersion"></span>,
+				powered by digital-ink
+				<span id="SDKVersion"></span>
+			</h5>
+
+			<canvas class="layer-transforms" style="display: none" oncontextmenu="event.preventDefault()"></canvas>
+			<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+
+			<div class="selection selection-vector" style="display: none"></div>
+		</div>
+	</div>
+
+	<div class="FlexWrapper Overlay" style="display: none" onclick="this.style = 'display: none'">
+		<div class="Dialog" onclick="event.stopPropagation()"></div>
+	</div>
+</body>
+</html>

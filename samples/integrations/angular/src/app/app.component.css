@@ -1,0 +1,11 @@
+.foxit-pdf-viewer-container {
+    display: block;
+    margin: 0 auto;
+    width: 1280px;
+    height: 1024px;
+}
+.foxit-pdf-viewer-app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

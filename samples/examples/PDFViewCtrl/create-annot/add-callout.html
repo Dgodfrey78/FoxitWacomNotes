@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>Foxit PDF SDK For Web</title>
+    <link rel="shortcut icon" href="../../assets/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../../lib/PDFViewCtrl.css">
+</head>
+<body>
+<div id="pdf-viewer"></div>
+<script src="../../license-key.js"></script>
+<script src="../../../lib/PDFViewCtrl.full.js"></script>
+<script>
+    window.$ = PDFViewCtrl.jQuery;
+    let IStateHandler = PDFViewCtrl.IStateHandler;
+    var PDFViewer = PDFViewCtrl.PDFViewer;
+    var pdfViewer = new PDFViewer({
+        libPath: '../../../lib',
+        jr: {
+            licenseSN: licenseSN,
+            licenseKey: licenseKey,
+        }
+    });
+    pdfViewer.init('#pdf-viewer');
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', './butterfiles.pdf', true);
+    xhr.responseType = 'blob';
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+            return;
+        }
+        var status = xhr.status;
+        if ((status >= 200 && status < 300) || status === 304) {
+            pdfViewer.openPDFByFile(xhr.response).catch(function (e) {
+                if (e.error === 11 && e.encryptDict.Filter === 'FOPN_foweb') {
+                    var fileOpenKey = getFileOpenKey(e.encryptDict);
+                    pdfViewer.reopenPDFDoc(e.pdfDoc, {
+                        fileOpen: {
+                            encryptKey: fileOpenKey
+                        }
+                    })
+                }
+            })
+        }
+    };
+    xhr.send();
+
+    //The following example will guide you how to add and register a StateHandler class of callout type, so to implement the logic for creating a callout.
+
+    //Create a StateHandler of type Callout
+    var CalloutStateHandler = function () {
+    };
+    _inherits(CalloutStateHandler, IStateHandler);
+    CalloutStateHandler.getStateName = function () {
+        return "createCallout";
+    };
+    CalloutStateHandler.prototype.pageHandler = function (pageRender) {
+        var Hammer = PDFViewCtrl.Hammer;
+        var $handler = pageRender.$handler;
+
+        var shapeDom = $('<canvas class="fv__create-callout-state-canvas" style="position:absolute"></canvas>');
+       $handler.append(shapeDom);
+
+
+        let eHandler = $handler[0];
+        let hammer = this.hammer = new Hammer.Manager(eHandler, {
+            recognizers: [
+                [Hammer.Pan, {direction: Hammer.DIRECTION_ALL}]
+            ]
+        });
+ 
+        let calloutShape = new PDFViewCtrl.CalloutShape ();
+
+        let panAnnotInfo;
+        let startPoints;
+
+        hammer.on('panstart', function (e) {
+            let point = getDevicePagePoint (eHandler, e);
+            if (!startPoints) {
+                startPoints = point;
+                return;
+            }
+        });
+        hammer.on("panmove", function (e) {
+            if (startPoints) {
+                let page = pageRender.page;
+
+                let pageRect = eHandler.getBoundingClientRect ();
+                let srcEvent = e.srcEvent;
+                    
+                const clientX = getClientX(srcEvent)- pageRect.left;
+                const clientY = getClientY(srcEvent)- pageRect.top;
+
+                let tempPanAnnotInfo = PDFViewCtrl.shared.CalloutPointsReviser.calcCalloutPosition ({
+                    start:[startPoints.x,startPoints.y],
+                    end:[clientX,clientY],
+                    page,
+                    width:page.getMediaWidth (),
+                    height:page.getMediaHeight (),
+                    rotate:page.getRotation(),
+                    borderStyle:{style:0},
+                    endingStyle:0,
+                    scale: pageRender.scale,
+                    rotate: pageRender.rotate
+                });
+
+                if(tempPanAnnotInfo.invalid){
+                    return;
+                }
+
+                panAnnotInfo = tempPanAnnotInfo;
+
+                let devicePoints = [];
+                for (let i = 0; i < 3; i++) {
+                    devicePoints.push (
+                    page.getDevicePoint (
+                        [
+                        panAnnotInfo.calloutLinePoints[i].x,
+                        panAnnotInfo.calloutLinePoints[i].y,
+                        ],
+                        pageRender.scale,
+                        pageRender.rotate
+                    )
+                    );
+                }
+
+                let deviceRect = page.getDeviceRect (
+                    panAnnotInfo.rect,
+                    pageRender.scale,
+                    pageRender.rotate
+                );
+
+                let innderDeviceRect = page.getDeviceRect (
+                    panAnnotInfo.innerRect,
+                    pageRender.scale,
+                    pageRender.rotate
+                );
+
+                $ (shapeDom).css ({
+                    left: deviceRect.left,
+                    top: deviceRect.top,
+                });
+                calloutShape.init(null, shapeDom)
+                calloutShape.show (devicePoints, deviceRect, innderDeviceRect);
+                }
+        });
+        hammer.on('panend', function (e) {
+            startPoints = null;
+            if(panAnnotInfo){
+                addAnnot (panAnnotInfo);
+            }
+            calloutShape.hide ();
+        });
+
+        function addAnnot (position) {
+            return pageRender.getPDFPage ().then (page => {
+                let annotJson = Object.assign (
+                {},
+                {
+                    type: 'freetext',
+                    intent: 'FreeTextCallout',
+                    subject: 'FreeTextCallout',
+                    'interior-color': 0x00ffffff,
+                    rotate: ((360-page.getRotation()*90 - pageRender.getRotation()) % 360 + 360) % 360,
+                    flags:4,
+                },
+                position,
+                );
+                
+                return page.addAnnot (annotJson);
+            })
+            .then (annots => {
+                const annot = annots[0];
+                const component = pageRender.annotsRender.getAnnotRender(annot.getId()).component;
+                component.active (true)
+                setTimeout(() => {
+                component.showReplyDialog ('comment');
+                }, 0);
+            })
+        }
+    };
+
+    CalloutStateHandler.prototype.destroyPageHandler = function () {
+        this.hammer && this.hammer.destroy ();
+    };
+    CalloutStateHandler.prototype.out = function () {
+        this.destroyPageHandler();
+    };
+    //Registers the state handler of Callout type to the StateHandlerManager and switch
+    let stateHandlerManager = pdfViewer.getStateHandlerManager();
+    stateHandlerManager.register(CalloutStateHandler);
+    stateHandlerManager.switchTo("createCallout");
+
+    //Gets the device coordinate point relative to the page
+    function getDevicePagePoint(elem, event) {
+        let pageRect = elem.getBoundingClientRect();
+        let srcEvent = event.srcEvent;
+        const clientX = getClientX(srcEvent);
+        const clientY = getClientY(srcEvent);
+        return {
+            x: clientX - pageRect.left - event.deltaX,
+            y: clientY - pageRect.top - event.deltaY,
+        };
+    };
+
+    function getPoint(elem, e) {
+        let pageRect = elem.getBoundingClientRect();
+        let srcEvent = e.srcEvent;
+        const clientX = getClientX(srcEvent);
+        const clientY = getClientY(srcEvent);
+        let point = {x: clientX - pageRect.left, y: clientY - pageRect.top};
+        return point;
+    };
+
+    //Gets the X-axis coordinates of the client
+    function getClientX(e) {
+        if ('clientX' in e) {
+            return e.clientX;
+        } else {
+            switch (e.type) {
+                case 'touchstart':
+                case 'touchmove':
+                    return e.touches[0].clientX;
+                case 'touchend':
+                case 'touchcancel':
+                    return e.changedTouches[0].clientX;
+            }
+        }
+    }
+
+    //Gets the Y-axis coordinates of the client
+    function getClientY(e) {
+        if ('clientY' in e) {
+            return e.clientY;
+        } else {
+            switch (e.type) {
+                case 'touchstart':
+                case 'touchmove':
+                    return e.touches[0].clientY;
+                case 'touchend':
+                case 'touchcancel':
+                    return e.changedTouches[0].clientY;
+            }
+        }
+    }
+
+    //Gets device rectangle
+    function getRect(startPoints, endPoints) {
+        let left = startPoints[0];
+        let top = startPoints[1];
+        let right = endPoints[0];
+        let bottom = endPoints[1];
+        let temp;
+        if (right < left) {
+            temp = left;
+            left = right;
+            right = temp;
+        }
+        if (bottom < top) {
+            temp = top;
+            top = bottom;
+            bottom = temp;
+        }
+        return {left: left, top: top, right: right, bottom: bottom};
+    }
+
+    function deviceToPdf(page,scale, rotate,result,list,rect) {
+    list.forEach((point) => {
+        let [x, y] = page.reverseDevicePoint([point.x, point.y], scale, rotate);
+        if(x>rect.right)rect.right=x;
+        else if(x<rect.left)rect.left = x;
+
+        if(y>rect.top)rect.top=y;
+        else if(y<rect.bottom)rect.bottom = y;
+        result.push({x: x, y: y,type:point.type});
+    });
+    return result;
+}
+
+    function _inherits(subClass, superClass) {
+        if (typeof superClass !== "function" && superClass !== null) {
+            throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+        }
+        subClass.prototype = Object.create(superClass && superClass.prototype, {
+            constructor: {
+                value: subClass,
+                enumerable: false,
+                writable: true,
+                configurable: true
+            }
+        });
+        if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+    }
+</script>
+</body>
+</html>
