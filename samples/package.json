@@ -64,6 +64,9 @@
         "changeOrigin": true
     }
 },
+  "engines":{
+    "node": "14.5.x"
+  },
 "collaboration-websocket": {
     "target": "http://127.0.0.1:9111",
     "changeOrigin": true,

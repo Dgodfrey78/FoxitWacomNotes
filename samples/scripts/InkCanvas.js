@@ -320,6 +320,12 @@ class InkCanvas extends InkController {
 	}
 
 	import(input, type) {
+		var canvas = document.getElementById('canvas');
+		var image = new Image();
+		image.src = canvas.toDataURL('image/png',1.0);
+		sessionStorage.setItem('key',image.src);
+		let data = sessionStorage.getItem('key');
+		console.log(data);
 		let reader = new FileReader();
 
 		if (type == "uim")
@@ -378,6 +384,7 @@ class InkCanvas extends InkController {
 	}
 
 	async save() {
+		console.log("here");
 		let buffer = await this.encode();
 		fsx.saveAs(buffer, "ink.uim", "application/vnd.wacom-ink.model");
 	}

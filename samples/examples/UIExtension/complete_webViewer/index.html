@@ -338,6 +338,34 @@
             pdfui.redraw().catch(function(err) {console.log(err)});
         });
 
+        pdfui.addViewerEventListener(Events.tapPage, function (){
+
+          pdfui.getPDFViewer().then(viewer=>{
+            const str = sessionStorage.getItem('key');
+            const words = str.split(',');
+            const rect = {bottom:0,left:0,right:100,top:100};
+
+            var enc = window.atob(words[1]);
+            var len = enc.length;
+            var bytes = new Uint8Array(len);
+            for (var i = 0; i < len; i++) {
+              bytes[i] = enc.charCodeAt(i);
+            }
+            this.current = viewer.getPDFDocRender();
+            this.doc=this.current.getPDFDoc();
+            var pageNum = this.current.getCurrentPageIndex();
+            console.log(pageNum);
+            this.doc.getPageByIndex(pageNum).then(page=>{
+              console.log(page.getWidth());
+              page.addImage(bytes.buffer,rect,0);
+            });
+
+
+
+          })
+
+        });
+
         //signature handlers
         var requestData = function(type, url, responseType, body){
             return new Promise(function(res, rej){
