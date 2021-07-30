@@ -27,24 +27,6 @@ The SDK is free of charge and does not need a license.
 
 ---
 
-## Using the WILL SDK Sample Code
-
-* copy these folder from the downloaded sdk to the samples folder
-    * *wacom/digital-ink*
-* start a command prompt in the samples folder
-* use the command ```npm install``` to create the node_modules folder
-
-The web based app needs a web server.
-Python's `SimpleHTTPServer` provides an easy way to get started.
-To start the web server, start a command prompt in the project root folder and run:
-
-```
-# Python 2:
-python -m SimpleHTTPServer 8080
-
-# Python 3:
-python -m http.server 8080
-```
 
 Now you can access the web-demo via:
 
